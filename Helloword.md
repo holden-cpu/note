@@ -8,9 +8,7 @@
 
 啊 一二三
 
-
-
-![](../../asset/Helloword/Snipaste_2021-04-10_00-01-56.png)
+![](../../asset/Helloword/Snipaste_2021-04-10_00-01-56-1617984455122.png)
 
 啊
 
