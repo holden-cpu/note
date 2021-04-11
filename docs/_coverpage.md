@@ -3,6 +3,8 @@
 
 > 我要开始装逼了
 
-[CSDN](https://blog.csdn.net/m0_37965018)
-[滚动鼠标](#introduction)
+今天又是充满七万的一天！
+
+[GitHub](https://github.com/holden-cpu/note)
+[Get Started](README.md)
 
