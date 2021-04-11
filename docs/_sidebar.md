@@ -1,12 +1,22 @@
-- Spring框架
+* jvm
+  * 字节码
+    * [类的加载](jvm\字节码与类的加载器\类的加载过程详解.md)
+* 定制化
 
-  - [初识spring框架](spring/【10分钟学Spring】：（一）初识Spring框架.md)
-  - [依赖注入及示例](spring/【10分钟学Spring】：（二）一文搞懂spring依赖注入（DI）.md)
-  - [spring的条件化装配](spring/【10分钟学Spring】：（三）你了解spring的高级装配吗_条件化装配bean.md)
-- 数据库
-<<<<<<< HEAD
-- [PC 测试](PCRegister介绍.md)
+  * [配置项](zh-cn/configuration.md)
+  * [主题](zh-cn/themes.md)
+  * [插件列表](zh-cn/plugins.md)
+  * [开发插件](zh-cn/write-a-plugin.md)
+  * [Markdown 配置](zh-cn/markdown.md)
+  * [代码高亮](zh-cn/language-highlight.md)
+* 指南
 
-  - [PC 测试](jvm/PCRegister介绍.md)
-
-    
+  * [部署](zh-cn/deploy.md)
+  * [文档助手](zh-cn/helpers.md)
+  * [兼容 Vue](zh-cn/vue.md)
+  * [CDN](zh-cn/cdn.md)
+  * [离线模式(PWA)](zh-cn/pwa.md)
+  * [服务端渲染 (SSR)](zh-cn/ssr.md)
+  * [文件嵌入](zh-cn/embed-files.md)
+* [Awesome docsify](zh-cn/awesome.md)
+* [Changelog](zh-cn/changelog.md)
