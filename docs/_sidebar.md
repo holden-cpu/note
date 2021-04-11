@@ -6,9 +6,7 @@
 - 数据库
 <<<<<<< HEAD
 - [PC 测试](PC Register介绍.md)
-- 
 
-=======
-  - [PC 测试](PC Register介绍.md)
-- 
->>>>>>> 094597d36916637aa6206973dcebe82d077caca1
+  - [PC 测试](jvm/PC Register介绍.md)
+
+    
