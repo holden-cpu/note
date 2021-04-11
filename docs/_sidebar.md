@@ -5,8 +5,8 @@
   - [spring的条件化装配](spring/【10分钟学Spring】：（三）你了解spring的高级装配吗_条件化装配bean.md)
 - 数据库
 <<<<<<< HEAD
-- [PC 测试](PC Register介绍.md)
+- [PC 测试](PCRegister介绍.md)
 
-  - [PC 测试](jvm/PC Register介绍.md)
+  - [PC 测试](jvm/PCRegister介绍.md)
 
     
