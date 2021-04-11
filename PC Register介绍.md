@@ -4,7 +4,7 @@
 
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615016217375-c20349b8-c05b-40a8-9be5-bb296959b65e.png)
 
-- JVM中的程序计数寄存器（Program Counter Register）中，Register的命名源于CPU的寄存器，寄存器存储指令相关的现场信息。CPU只有把数据装载到寄存器才能够运行。
+- JVM中的程序计数寄存器（Program Counter Register）中，Register的命名源于CPU的寄存器，寄存器存储指令相关的现场信息。CPU只有把数据装载到寄存器才能够运行。  
 - ![](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210411110254870.png)
 - ![image-20210411110254870](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210411110254870.png)
 - ![image-20210411110136527](C:\Users\98449\AppData\Roaming\Typora\typora-user-images\image-20210411110136527.png
