@@ -9,13 +9,15 @@
 >
 > > [GitHub](https://github.com/holden-cpu/note "github")
 > >
-> > [123]: www.baidu.com
+> > [GitHub在线阅读](https://holden-cpu.github.io/note/#/)
 > >
-> > [在线阅读](https://holden-cpu.github.io/note/#/)
+> > [Gitee在线阅读](http://holdencpu.gitee.io/note)
 
 
 
 # jvm
+
+## jvm内存
 
 ## 字节与类的加载器
 
