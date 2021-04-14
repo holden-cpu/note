@@ -1509,7 +1509,7 @@ trim修饰符：
 </script>
 ```
 
-```
+```vue
 <div id="app">
   <!--1.修饰符: lazy-->
   <input type="text" v-model.lazy="message">
