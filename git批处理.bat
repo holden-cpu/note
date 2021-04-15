@@ -15,7 +15,7 @@ git add -A .
 echo 提交变更到本地仓库
 
 
-git commit -m "脚本"
+git commit -m "index"
 
 
 
