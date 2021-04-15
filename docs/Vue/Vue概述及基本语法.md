@@ -1,6 +1,6 @@
 ## 一、邂逅Vuejs
 
-### 1.1 认识Vuejs
+### 认识Vuejs
 
 - Vue的读音
 
@@ -23,8 +23,7 @@
 
 
 
-
-### 1.2 安装Vue
+### 安装Vue
 
 - CDN引入
 
@@ -48,7 +47,7 @@
 
 
 
-### 1.3 Vue的初体验
+### Vue的初体验
 
 - HelloVuejs
 
@@ -174,7 +173,7 @@
 </body>
 ```
 
-### 1.4 Vue中的MVVM
+### Vue中的MVVM
 
 >  https://zh.wikipedia.org/wiki/MVVM 
 
@@ -199,7 +198,7 @@
 
 
 
-### 1.5 创建Vue时, options可以放那些东西
+### 创建Vue时, options可以放那些东西
 
 - el:
 
@@ -217,7 +216,7 @@
   - 类型：{ [key: string]: Function } 
   - 作用：定义属于Vue的一些方法，可以在其他地方调用，也可以在指令中使用。
 
-### 1.6 生命周期函数
+### 生命周期函数
 
 - ![](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615540947431-06134faa-ba9b-40b9-8915-0a0923bbdb5f.png)
 
@@ -321,7 +320,7 @@
 
 ### v-pre: {{}}
 
-- v-pre用于跳过这个元素和它子元素的编译过程，用于显示原本的Mustache语法。
+- v-pre用于跳过这个元素zz和它子元素的编译过程，用于显示原本的Mustache语法。
 
 ```vue
 <div id="app">
@@ -369,20 +368,20 @@
 </script>
 ```
 
-## 三. v-bind
+## 三、v-bind
 
 - 作用：动态绑定属性 
 - 缩写：**:** 
 - 预期：any (with argument) | Object (without argument)
 -  参数：attrOrProp (optional) 
 
-### 3.1. v-bind绑定基本属性
+### v-bind绑定基本属性
 
 - v-bind:src
 - :href
 - <!-- 动态参数的缩写 (2.6.0+) --> <a :[key]="url"> ... </a>
 
-```
+```vue
 <div id="app">
   <!-- 错误的做法: 这里不可以使用mustache语法-->
   <!--<img src="{{imgURL}}" alt="">-->
@@ -409,7 +408,7 @@
 </script>
 ```
 
-### 3.2. v-bind动态绑定class
+### v-bind动态绑定class
 
 - 对象语法:  class后面跟的是一个对象。 作业 :class='{类名: boolean}'
 - 数组语法:  class后面跟的是一个数组。 
@@ -487,12 +486,12 @@
 </script>
 ```
 
-### 3.3. v-bind动态绑定style
+### v-bind动态绑定style
 
 - 对象语法:
 - 数组语法:
 
-```
+```vue
 <div id="app">
   <!--<h2 :style="{key(属性名): value(属性值)}">{{message}}</h2>-->
 
@@ -520,6 +519,9 @@
       }
     }
   })
+  
+  
+  
 </script>
 <div id="app">
   <h2 :style="[baseStyle, baseStyle1]">{{message}}</h2>
@@ -547,7 +549,7 @@
 - 案例一: firstName+lastName
 - 将上面的代码换成计算属性
 
-```
+```vue
 <div id="app">
   <h2>{{firstName + ' ' + lastName}}</h2>
   <h2>{{firstName}} {{lastName}}</h2>
@@ -583,7 +585,7 @@
 - 案例二: books -> price
 - 复杂的操作
 
-```
+```vue
 <div id="app">
   <h2>总价格: {{totalPrice}}</h2>
 </div>
@@ -621,12 +623,12 @@
 </script>
 ```
 
-### 计算属性的setter和getter
+### setter和getter
 
 - setter方法一般不需要实现
-- 所以有更简便的写法`属性名: function () { }`，此处的方法相当于getter方法，因此调用时可以直接`{{属性名}}`，而不需要`{{属性名``（）``}}`
+- 所以有更简便的写法`属性名: function () { }`，此处的方法相当于getter方法，因此调用时可以直接`{{属性名}}`，而不需要`{{属性名（）}}`
 
-```
+```vue
 <div id="app">
   <h2>{{fullName}}</h2>
 </div>
@@ -669,7 +671,7 @@
 
 **计算属性与Methods的对比**
 
-```
+```vue
 <div id="app">
   <!--1.直接拼接: 语法过于繁琐-->
   <h2>{{firstName}} {{lastName}}</h2>
@@ -713,7 +715,7 @@
   })
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615782035472-e4750e97-7cbd-4599-8997-06586825eb1e.png)
+![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615782035472-e4750e97-7cbd-4599-8997-06586825eb1e.png)
 
 计算属性会进行缓存，如果多次使用时，计算属性只会调用一次。
 
@@ -725,18 +727,16 @@
 
 - 事实上var的设计可以看成JavaScript语言设计上的错误. 但是这种错误多半不能修复和移除, 以为需要向后兼容.
 
-- - 大概十年前, Brendan Eich就决定修复这个问题, 于是他添加了一个新的关键字: let. 
+  - 大概十年前, Brendan Eich就决定修复这个问题, 于是他添加了一个新的关键字: let. 
   - 我们可以将let看成更完美的var 
-
-
 
 - 块级作用域 
 
-- - JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关，var没有块级作用域 
+  - JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关，var没有块级作用域 
   - 针对于其他块定义来说是没有作用域的，比如if/for等，这在我们开发中往往会引起一些问题。 
   - ES5只有function有作用域
 
-```
+```vue
 <button>按钮1</button>
 <button>按钮2</button>
 <button>按钮3</button>
@@ -868,7 +868,7 @@ const的注意
 
 ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615812552352-78ae5c19-ad10-48c2-bed5-af7b4005e284.png)
 
-```
+```vue
 <script>
   // 1.注意一: 一旦给const修饰的标识符被赋值之后, 不能修改
   // const name = 'why';
@@ -900,9 +900,9 @@ ES6中，对对象字面量进行了很多增强。
 
 属性初始化简写和方法的简写： 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615813017351-2c7092e5-ebaf-461c-bbf3-b6b930496011.png)
+![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615813017351-2c7092e5-ebaf-461c-bbf3-b6b930496011.png)
 
-```
+```vue
 <script>
   // const obj = new Object()
 
@@ -961,27 +961,24 @@ ES6中，对对象字面量进行了很多增强。
 
 ## 六、事件监听
 
-- 在前端开发中，我们需要经常和用于交互。 
-
-- - 这个时候，我们就必须监听用户发生的时间，比如点击、拖拽、键盘事件等等 
-  - 在Vue中如何监听事件呢？使用v-on指令 
+在前端开发中，我们需要经常和用于交互。 这个时候，我们就必须监听用户发生的时间，比如点击、拖拽、键盘事件等等 在Vue中如何监听事件呢？使用v-on指令 
 
 - v-on介绍 
 
-- - 作用：绑定事件监听器 
+  - 作用：绑定事件监听器 
   - 缩写：@ 
   - 预期：Function | Inline Statement | Object 
   - 参数：event 
 
-### v-on基础 
+### v-on基础
 
 - v-on的使用 
 
-- - 下面的代码中，我们使用了v-on:click="counter++” 
-  - ![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615814316318-c0bc9741-67bb-4df6-9557-63e838cdaabe.png)
+  - 下面的代码中，我们使用了v-on:click="counter++” 
+  - ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615814316318-c0bc9741-67bb-4df6-9557-63e838cdaabe.png)
   - 另外，我们可以将事件指向一个在methods中定义的函数
 
-```
+```vue
 <div id="app">
   <h2>{{counter}}</h2>
   <!--<h2 v-bind:title></h2>-->
@@ -1022,17 +1019,13 @@ ES6中，对对象字面量进行了很多增强。
 
 - 当通过methods中定义方法，以供@click调用时，需要注意参数问题： 
 
-
-
 - 情况一：如果该方法不需要额外参数，那么方法后的()可以不添加。 
 
-- - 但是注意：如果方法本身中有一个参数，那么会默认将原生事件event参数传递进去 
-
-
+  - 但是注意：如果方法本身中有一个参数，那么会默认将原生事件event参数传递进去 
 
 - 情况二：如果需要同时传入某个参数，同时需要event时，可以通过$event传入事件。
 
-```
+```vue
 <div id="app">
   <!--1.事件调用的方法没有参数-->
   <button @click="btn1Click()">按钮1</button>
@@ -1081,18 +1074,58 @@ ES6中，对对象字面量进行了很多增强。
 
 - 在某些情况下，我们拿到event的目的可能是进行一些事件处理。
 
-
-
 -  Vue提供了修饰符来帮助我们方便的处理一些事件：
 
-- -  .stop - 调用 event.stopPropagation()。 
-  - .prevent - 调用 event.preventDefault()。 
-  - .{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
-  - .native - 监听组件根元素的原生事件。 
-  - .once - 只触发一次回调。 
-  - ![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615816022194-7862234d-99d9-4d08-bbf2-44d881b62396.png)
+   -  .stop - 调用 event.stopPropagation()。 
+   -  .prevent - 调用 event.preventDefault()。 
+   -  .{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
+   -  .native - 监听组件根元素的原生事件。 
+   -  .once - 只触发一次回调。 
+   -  .passive
 
-```
+   ````vue
+   <!-- 阻止单击事件继续传播 -->
+   <a v-on:click.stop="doThis"></a>
+   
+   <!-- 提交事件不再重载页面 -->
+   <form v-on:submit.prevent="onSubmit"></form>
+   
+   <!-- 修饰符可以串联 -->
+   <a v-on:click.stop.prevent="doThat"></a>
+   
+   <!-- 只有修饰符 -->
+   <form v-on:submit.prevent></form>
+   
+   <!-- 添加事件监听器时使用事件捕获模式 -->
+   <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+   <div v-on:click.capture="doThis">...</div>
+   
+   <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+   <!-- 即事件不是从内部元素触发的 -->
+   <div v-on:click.self="doThat">...</div>
+   
+   <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+   <!-- 而不会等待 `onScroll` 完成  -->
+   <!-- 这其中包含 `event.preventDefault()` 的情况 -->
+   <div v-on:scroll.passive="onScroll">...</div>
+   
+   ````
+
+   -  使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 `v-on:click.prevent.self` 会阻止**所有的点击**，而 `v-on:click.self.prevent` 只会阻止对元素自身的点击。
+   -  不要把 `.passive` 和 `.prevent` 一起使用，因为 `.prevent` 将会被忽略，同时浏览器可能会向你展示一个警告。请记住，`.passive` 会告诉浏览器你*不*想阻止事件的默认行为。
+   -  为了在必要的情况下支持旧浏览器，Vue 提供了绝大多数常用的按键码的别名：
+      - `.enter`
+      - `.tab`
+      - `.delete` (捕获“删除”和“退格”键)
+      - `.esc`
+      - `.space`
+      - `.up`
+      - `.down`
+      - `.left`
+      - `.right`
+   -  ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615816022194-7862234d-99d9-4d08-bbf2-44d881b62396.png)
+
+```vue
 <div id="app">
   <!--1. .stop修饰符的使用-->
   <div @click="divClick">
@@ -1147,16 +1180,15 @@ ES6中，对对象字面量进行了很多增强。
 
 - v-if、v-else-if、v-else 
 
-- - 这三个指令与JavaScript的条件语句if、else、else if类似。 
+  - 这三个指令与JavaScript的条件语句if、else、else if类似。 
   - Vue的条件指令可以根据表达式的值在DOM中渲染或销毁元素或组件 
-
 - v-if的原理： 
 
-- - v-if后面的条件为false时，对应的元素以及其子元素不会渲染。 
+  - v-if后面的条件为false时，对应的元素以及其子元素不会渲染。 
   - 也就是根本没有不会有对应的标签出现在DOM中。 
-
 - 简单的案例演示： 
-- ![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1616050075323-a996f072-e8ee-4e9e-bacb-7c18540ef4a5.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1616050085983-590c3302-9bd1-4f72-8cd2-7df969fe87be.png)
+- ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1616050075323-a996f072-e8ee-4e9e-bacb-7c18540ef4a5.png)
+- ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1616050085983-590c3302-9bd1-4f72-8cd2-7df969fe87be.png)
 - Vue在进行DOM渲染时，出于性能考虑，会尽可能的复用已经存在的元素，而不是重新创建新的元素。
 - 如果我们不希望Vue出现类似重复利用的问题，可以给对应的input添加key 并且我们需要保证key的不同 
 
@@ -1164,18 +1196,17 @@ ES6中，对对象字面量进行了很多增强。
 
 - v-if和v-show对比 
 
-- - v-if和v-show都可以决定一个元素是否渲染
-
-- - - v-if当条件为false时，压根不会有对应的元素在DOM中。 
+  - v-if和v-show都可以决定一个元素是否渲染
+    - v-if当条件为false时，压根不会有对应的元素在DOM中。 
     - v-show当条件为false时，仅仅是将元素的display属性设置为none而已。 
 
-- - 当需要在显示与隐藏之间切片很频繁时，使用v-show 当只有一次切换时，通过使用v-if 
+  - 当需要在显示与隐藏之间切片很频繁时，使用v-show 当只有一次切换时，通过使用v-if 
 
 ### v-for
 
 **v-for遍历数组**
 
-```
+```vue
 <!--1.在遍历的过程中,没有使用索引值(下标值)-->
   <ul>
     <li v-for="item in names">{{item}}</li>
@@ -1191,7 +1222,7 @@ ES6中，对对象字面量进行了很多增强。
 
 **v-for可以用户遍历对象**
 
-```
+```vue
 <div id="app">
   <!--1.在遍历对象的过程中, 如果只是获取一个值, 那么获取到的是value-->
   <ul>
@@ -1212,33 +1243,29 @@ ES6中，对对象字面量进行了很多增强。
 
 - 官方推荐我们在使用v-for时，给对应的元素或组件添加上一个**:key属性**
 
-
-
 - 当某一层有很多相同的节点时，也就是列表节点时，我们希望插入一个新的节点 
 
-- - 我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的。 
+  - 我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的。 
   - 即把C更新成F，D更新成C，E更新成D，最后再插入E，效率低
 
 - 所以我们需要使用key来给每个节点做一个唯一标识 
 
-- - Diff算法就可以正确的识别此节点 
+  - Diff算法就可以正确的识别此节点 
   - 找到正确的位置区插入新的节点。 
-
-
 
 - 所以一句话，key的作用主要是为了高效的更新虚拟DOM。 
 
 
 
-### 检测数组更新 
+### 检测数组更新
 
 因为Vue是响应式的，所以当数据发生变化时，Vue会自动检测数据变化，视图会发生对应的更新。 
 
 Vue中包含了一组观察数组编译的方法，使用它们改变数组也会触发视图的更新。 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1616054963368-a2010992-d3e3-4f02-b62c-24d8138631d6.png)
+![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1616054963368-a2010992-d3e3-4f02-b62c-24d8138631d6.png)
 
-```
+```vue
 <div id="app">
   <ul>
     <li v-for="item in letters">{{item}}</li>
@@ -1318,7 +1345,7 @@ Vue中使用v-model指令来实现表单元素和数据的双向绑定
 
 ### 基本使用
 
-```
+```vue
 <div id="app">
   <input type="text" v-model="message">
   {{message}}
@@ -1335,7 +1362,7 @@ Vue中使用v-model指令来实现表单元素和数据的双向绑定
 </script>
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1616136029948-679dac9a-dfab-4bff-9610-95239a0aaaae.png)
+![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1616136029948-679dac9a-dfab-4bff-9610-95239a0aaaae.png)
 
 v-model其实是一个语法糖，它的背后本质上是包含两个操作： 
 
@@ -1345,32 +1372,28 @@ v-model其实是一个语法糖，它的背后本质上是包含两个操作：
 - `<input type="text" v-model="message"> 等同于 `
 - `<input type="text" v-bind:value="message" v-on:input="message =$event.target.value"> `
 
-
-
 ### v-model：radio 
 
 当存在多个单选框时 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1616136210058-f68e64f0-c504-4e67-a3bf-0bd3fcd33d6c.png?x-oss-process=image%2Fresize%2Cw_1500)
+![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1616136210058-f68e64f0-c504-4e67-a3bf-0bd3fcd33d6c.png)
 
-
-
-### v-model：checkbox 
+### v-model：checkbox
 
 复选框分为两种情况：
 
 - 单个勾选框和多个勾选框 
 - 单个勾选框：
 
-- - v-model即为布尔值。
+  - v-model即为布尔值。
   - 此时input的value并不影响v-model的值。
 
 - 多个复选框： 
 
-- - 当是多个复选框时，因为可以选中多个，所以对应的data中属性是一个数组。 
+  - 当是多个复选框时，因为可以选中多个，所以对应的data中属性是一个数组。 
   - 当选中某一个时，就会将input的value添加到数组中。
 
-```
+```vue
 <div id="app">
   <!--1.checkbox单选框-->
   <label for="agree">
@@ -1411,15 +1434,15 @@ v-model其实是一个语法糖，它的背后本质上是包含两个操作：
 
 - 单选：只能选中一个值。 
 
-- - v-model绑定的是一个值。 
+  - v-model绑定的是一个值。 
   - 当我们选中option中的一个时，会将它对应的value赋值到mySelect中 
 
 - 多选：可以选中多个值。 
 
-- - v-model绑定的是一个数组。 
+  - v-model绑定的是一个数组。 
   - 当选中多个值时，就会将选中的option对应的value添加到数组mySelects中 
 
-```
+```vue
 <div id="app">
   <!--1.选择一个-->
   <select name="abc" v-model="fruit">
@@ -1453,7 +1476,7 @@ v-model其实是一个语法糖，它的背后本质上是包含两个操作：
 </script>
 ```
 
-### 修饰符 
+### 修饰符
 
 lazy修饰符： 
 
@@ -1461,53 +1484,16 @@ lazy修饰符：
 - 也就是说，一旦有数据发生改变对应的data中的数据就会自动发生改变。
 - lazy修饰符可以让数据在失去焦点或者回车时才会更新： 
 
-
-
 number修饰符： 
 
 - 默认情况下，在输入框中无论我们输入的是字母还是数字，都会被当做字符串类型进行处理。
 - 但是如果我们希望处理的是数字类型，那么最好直接将内容当做数字处理。 
 - number修饰符可以让在输入框中输入的内容自动转成数字类型
 
-
-
 trim修饰符： 
 
 - 如果输入的内容首尾有很多空格，通常我们希望将其去除 
 - trim修饰符可以过滤内容左右两边的空格 
-
-```
-<div id="app">
-  <!--1.修饰符: lazy-->
-  <input type="text" v-model.lazy="message">
-  <h2>{{message}}</h2>
-
-
-  <!--2.修饰符: number-->
-  <input type="number" v-model.number="age">
-  <h2>{{age}}-{{typeof age}}</h2>
-
-  <!--3.修饰符: trim-->
-  <input type="text" v-model.trim="name">
-  <h2>您输入的名字:{{name}}</h2>
-</div>
-
-<script src="../js/vue.js"></script>
-<script>
-  const app = new Vue({
-    el: '#app',
-    data: {
-      message: '你好啊',
-      age: 0,
-      name: ''
-    }
-  })
-
-  var age = 0
-  age = '1111'
-  age = '222'
-</script>
-```
 
 ```vue
 <div id="app">
@@ -1541,3 +1527,4 @@ trim修饰符：
   age = '222'
 </script>
 ```
+
