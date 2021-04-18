@@ -14,7 +14,7 @@ At its core, webpack is a static module bundler for modern JavaScript applicatio
 前端模块化：
 
 - 在前面学习中，我已经用了大量的篇幅解释了为什么前端需要模块化。
-  而且我也提到了目前使用前端模块化的一些方案：AMD、CMD、CommonJS、ES6。
+  而且也提到了目前使用前端模块化的一些方案：AMD、CMD、CommonJS、ES6。
   在ES6之前，我们要想进行模块化开发，就必须借助于其他的工具，让我们可以进行模块化开发。
   并且在通过模块化开发完成了项目后，还需要处理模块间的各种依赖，并且将其进行整合打包。
   而webpack其中一个核心就是让我们可能进行模块化开发，并且会帮助我们处理模块间的依赖关系。
@@ -95,23 +95,38 @@ cpm istall webpack@3.6.0 --save-dev
   - main.js：项目的入口文件。具体内容查看下面详情。
   - mathUtils.js：定义了一些数学工具函数，可以在其他地方引用，并且使用。具体内容查看下面的详情。
 - index.html：浏览器打开展示的首页html
-- package.json：通过npm init生成的，npm包管理的文件（暂时没有用上，后面才会用上）
+- package.json：通过npm init生成的，npm包管理的文件（暂时没有用上，后面才会用上）![image-20210418113816856](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210418113816856.png)
 
-<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416181607902.png" alt="image-20210416181607902" style="zoom:50%;" />
+mathUtils.js：
 
-mathUtils.js文件中的代码：
+```js
+function add(num1, num2) {
+  return num1 + num2
+}
 
-<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416181617351.png" alt="image-20210416181617351" style="zoom:50%;" />
+function mul(num1, num2) {
+  return num1 * num2
+}
 
-main.js文件中的代码：
+module.exports = {
+  add,
+  mul
+}
+```
 
-<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416181625304.png" alt="image-20210416181625304" style="zoom:50%;" />
+main.js：
+
+```js
+const {add,mul} = require('./mathUtils');
+console.log(add(20,30));
+console.log(mul(20,30));
+```
 
 ### js文件的打包
 
 现在的js文件中使用了模块化的方式进行开发，他们可以直接使用吗？不可以。
 
-- 因为如果直接在index.html引入这两个js文件，浏览器并不识别其中的模块化代码。
+- 因为如果直接在index.html引入这三个js文件，浏览器并不识别其中的模块化代码。<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210418114115349.png" alt="image-20210418114115349" style="zoom:50%;" />
 - 另外，在真实项目中当有许多这样的js文件时，我们一个个引用非常麻烦，并且后期非常不方便对它们进行管理。
 
 我们应该怎么做呢？使用webpack工具，对多个js文件进行打包。
@@ -122,7 +137,7 @@ main.js文件中的代码：
 
 OK，如何打包呢？使用webpack的指令即可
 
-```
+```bash
 将./src/main.js打包到 ./dist/bundle.js
 webpack ./src/main.js ./dist/bundle.js
 ```
@@ -150,20 +165,25 @@ webpack ./src/main.js ./dist/bundle.js
 
 当然可以，就是创建一个webpack.config.js文件
 
-<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416200630183.png" alt="image-20210416200630183" style="zoom:50%;" />
-
 ```js
 //依赖node中的东西，需要package.json
 const path = require('path')
 
 module.exports = {
+  //入口：可以是字符串/数组/对象，这里我们入口只有一个，所以写一个字符串即可
   entry: './src/main.js',
+  //出口：通常是一个对象，里面至少包含两个重要属性，path和filename
   output: {
+    //Node.js 中，__dirname 总是指向被执行 js 文件的绝对路径
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
 }
 ```
+
+Node.js 中，__dirname 总是指向被执行 js 文件的绝对路径
+
+`./` 会返回你执行 node 命令的路径，例如你的工作路径。有一个特殊情况是在 `require()` 中使用 `./` 时，这时的路径就会是含有 `require()` 的脚本文件的相对路径。
 
 生成package.json
 
