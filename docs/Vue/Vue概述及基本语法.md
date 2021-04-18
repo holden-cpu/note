@@ -1343,7 +1343,7 @@ Vue中包含了一组观察数组编译的方法，使用它们改变数组也�
 
 Vue中使用v-model指令来实现表单元素和数据的双向绑定
 
-### 基本使用
+### v-model基本使用
 
 ```vue
 <div id="app">
@@ -1372,7 +1372,7 @@ v-model其实是一个语法糖，它的背后本质上是包含两个操作：
 - `<input type="text" v-model="message"> 等同于 `
 - `<input type="text" v-bind:value="message" v-on:input="message =$event.target.value"> `
 
-### v-model：radio 
+### v-model：radio
 
 当存在多个单选框时 
 

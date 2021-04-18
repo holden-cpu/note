@@ -31,6 +31,9 @@
 - Vue
   - [Vue概述及基本语法](Vue\Vue概述及基本语法.md)
   - [组件化开发](Vue\组件化开发.md)
+  - [模块化开发](Vue/模块化开发.md)
+  - [Webpack](Vue/Webpack.md)
+  - [Vue CLI](Vue/Vue CLI.md)
 
 
 
