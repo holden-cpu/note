@@ -478,14 +478,300 @@ App.vue
 - 路由懒加载的主要作用就是将路由对应的组件打包成一个个的js代码块.
 - 只有在这个路由被访问到的时候, 才加载对应的组件
 
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420151155122.png" alt="image-20210420151155122" style="zoom: 33%;" />
+
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420151217848.png" alt="image-20210420151217848" style="zoom: 33%;" />
+
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420151235059.png" alt="image-20210420151235059" style="zoom:50%;" />
+
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420151251606.png" alt="image-20210420151251606" style="zoom:33%;" />
+
+懒加载的方式
+
+方式一: 结合Vue的异步组件和Webpack的代码分析.
+
+```
+const Home  = resolve =>{
+	require.ensure(['../components/Home.vue'],
+	() => {resolve(require('../components/Home.vue'))
+})}
+```
+
+方式二: AMD写法
+
+```
+const About = resolve => require(['../components/Abount.vue'],resolve)
+```
+
+方式三: 在ES6中, 我们可以有更加简单的写法来组织Vue异步组件和Webpack的代码分割.
+
+```
+const Home = () => import('../components/Home.vue')
+```
+
 
 
 ## vue-router嵌套路由
 
+### 认识嵌套路由
 
+嵌套路由是一个很常见的功能
+
+- 比如在home页面中, 我们希望通过/home/news和/home/message访问一些内容.
+- 一个路径映射一个组件, 访问这两个路径也会分别渲染两个组件.
+  路径和组件的关系如下:
+
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420152052382.png" alt="image-20210420152052382" style="zoom: 50%;" />
+
+实现嵌套路由有两个步骤:
+
+- 创建对应的子组件, 并且在路由映射中配置对应的子路由.
+
+- 在组件内部使用<router-view>标签.
+
+### 嵌套路由实现
+
+HomeMessage.vue
+
+```vue
+<template>
+  <div>
+    <ul>
+      <li>消息1</li>
+      <li>消息2</li>
+      <li>消息3</li>
+      <li>消息4</li>
+    </ul>
+  </div>
+</template>
+
+```
+
+HomeNews.vue
+
+```vue
+<template>
+  <div>
+    <ul>
+      <li>新闻1</li>
+      <li>新闻2</li>
+      <li>新闻3</li>
+      <li>新闻4</li>
+    </ul>
+  </div>
+</template>
+```
+
+index.js
+
+```
+// 2.创建VueRouter对象
+const routes = [
+  {
+    path: '/home',
+    component: Home,
+    meta: {
+      title: '首页'
+    },
+    children: [
+       {
+         path: '',
+         redirect: 'news'
+       },
+      {
+        path: 'news',
+        component: HomeNews
+      },
+      {
+        path: 'message',
+        component: HomeMessage
+      }
+    ]
+  }
+]
+```
+
+Home.vue
+
+```vue
+<template>
+  <div>
+    <h2>我是首页</h2>
+    <p>我是首页内容, 哈哈哈</p>
+
+    <router-link to="/home/news">新闻</router-link>
+    <router-link to="/home/message">消息</router-link>
+    <router-view></router-view>
+
+    <h2>{{message}}</h2>
+  </div>
+</template>
+```
 
 ## vue-router参数传递
 
+### 准备工作
+
+为了演示传递参数, 我们这里再创建一个组件, 并且将其配置好
+
+第一步: 创建新的组件Profile.vue 
+
+第二步: 配置路由映射 
+
+第三步: 添加跳转的<router-link> 
+
+### 传递参数的方式
+
+传递参数主要有两种类型: params和query
+
+params的类型:
+
+- 配置路由格式: /router/:id
+- 传递的方式: 在path后面跟上对应的值
+- 传递后形成的路径: /router/123, /router/abc
+
+query的类型:
+
+- 配置路由格式: /router, 也就是普通配置
+- 传递的方式: 对象中使用query的key作为传递方式
+- 传递后形成的路径: /router?id=123, /router?id=abc
+
+**方式一: <router-link>**
+
+Profile.vue
+
+```vue
+<template>
+  <div>
+    <h2>我是Profile组件</h2>
+    <h2>{{$route.query.name}}</h2>
+    <h2>{{$route.query.age}}</h2>
+    <h2>{{$route.query.height}}</h2>
+  </div>
+</template>
+```
+
+App.vue
+
+```vue
+<!--    <router-link to="/profile">档案</router-link>-->
+    <router-link :to="{path: '/profile', query: {name: 'why', age: 18, height: 1.88}}">档案</router-link>
+```
+
+**方式二: JavaScript代码**
+
+![image-20210420155415301](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420155415301.png)
+
+### \$route和\$router区别
+
+\$router为VueRouter实例，想要导航到不同URL，则使用\$router.push方法
+
+$route为当前router跳转对象里面可以获取name、path、query、params等 
+
 ## vue-router导航守卫
 
+我们来考虑一个需求: 在一个SPA应用中, 如何改变网页的标题呢?
+
+- 网页标题是通过<title>来显示的, 但是SPA只有一个固定的HTML, 切换不同的页面时, 标题并不会改变.
+- 但是我们可以通过JavaScript来修改<title>的内容.window.document.title = '新的标题'.
+- 那么在Vue项目中, 在哪里修改? 什么时候修改比较合适呢?
+
+普通的修改方式:
+
+- 我们比较容易想到的修改标题的位置是每一个路由对应的组件.vue文件中.
+- 通过mounted声明周期函数, 执行对应的代码进行修改即可.
+- 但是当页面比较多时, 这种方式不容易维护(因为需要在多个页面执行类似的代码).
+
+有没有更好的办法呢? 使用导航守卫即可.
+
+什么是导航守卫?
+
+- vue-router提供的导航守卫主要用来监听监听路由的进入和离开的.
+- vue-router提供了beforeEach和afterEach的钩子函数, 它们会在路由即将改变前和改变后触发.
+
+我们可以利用beforeEach来完成标题的修改.
+
+- 首先, 我们可以在钩子当中定义一些标题, 可以利用meta来定义
+- 其次, 利用导航守卫,修改我们的标题。
+
+导航钩子的三个参数解析:
+
+- to: 即将要进入的目标的路由对象.
+- from: 当前导航即将要离开的路由对象.
+- next: 调用该方法后, 才能进入下一个钩子
+
+index.js
+
+```js
+// 前置守卫(guard)
+router.beforeEach((to, from, next) => {
+  // 从from跳转到to
+  document.title = to.matched[0].meta.title
+  console.log(to);
+  next()
+})
+```
+
+补充一:如果是后置钩子, 也就是afterEach, 不需要主动调用next()函数.
+
+补充二: 上面我们使用的导航守卫, 被称之为全局守卫.
+
+- 路由独享的守卫.
+- 组件内的守卫.
+
+
+更多内容, 可以查看官网进行学习:
+
+> https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E8%B7%AF%E7%94%B1%E7%8B%AC%E4%BA%AB%E7%9A%84%E5%AE%88%E5%8D%AB
+
+> https://next.router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%85%A8%E5%B1%80%E5%89%8D%E7%BD%AE%E5%AE%88%E5%8D%AB
+
 ## keep-alive
+
+keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。
+
+它们有两个非常重要的属性:
+
+- include - 字符串或正则表达，只有匹配的组件会被缓存
+- exclude - 字符串或正则表达式，任何匹配的组件都不会被缓存
+
+router-view 也是一个组件，如果直接被包在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存：
+![image-20210420165427345](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420165427345.png)
+
+通过create声明周期函数来验证
+
+## TabBar练习
+
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210420174018515.png" alt="image-20210420174018515" style="zoom:33%;" />
+
+1. 如果在下方有一个单独的TabBar组件，你如何封装
+
+   - 自定义TabBar组件，在APP中使用
+
+   - 让TabBar出于底部，并且设置相关的样式
+
+2. TabBar中显示的内容由外界决定
+   - 定义插槽
+   - flex布局平分TabBar
+3. 自定义TabBarItem，可以传入 图片和文字
+   - 定义TabBarItem，并且定义两个插槽：图片、文字。
+   - 给两个插槽外层包装div，用于设置样式。
+   - 填充插槽，实现底部TabBar的效果
+
+4. 传入 高亮图片
+   - 定义另外一个插槽，插入active-icon的数据
+   - 定义一个变量isActive，通过v-show来决定是否显示对应的icon
+5. TabBarItem绑定路由数据
+   - 安装路由：npm install vue-router —save
+   - 完成router/index.js的内容，以及创建对应的组件
+   - main.js中注册router
+   - APP中加入<router-view>组件
+
+6. 点击item跳转到对应路由，并且动态决定isActive
+
+   - 监听item的点击，通过this.\$router.replace()替换路由路径
+
+   - 通过this.$route.path.indexOf(this.link) !== -1来判断是否是active
+
+7. 动态计算active样式
+   - 封装新的计算属性：this.isActive ? {'color': 'red'} : {}
