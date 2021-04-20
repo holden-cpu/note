@@ -229,6 +229,8 @@ D:\AWorkSpace\IdeaWorkSpace\VueDemo\webpack\webpack配置>
 
 ```
 
+在node开发中使用npm init会生成一个pakeage.json文件，这个文件主要是用来记录这个项目的详细信息的，它会将我们在项目开发中所要用到的包，以及项目的详细信息等记录在这个项目中。方便在以后的版本迭代和项目移植的时候会更加的方便。也是防止在后期的项目维护中误删除了一个包导致的项目不能够正常运行。使用npm init初始化项目还有一个好处就是在进行项目传递的时候不需要将项目依赖包一起发送给对方，对方在接受到你的项目之后再执行npm install就可以将项目依赖全部下载到项目里。
+
 根据package.json中的依赖需求，生成对应的依赖
 
 ```
@@ -279,8 +281,6 @@ npm install webpack@版本号 --save-dev
 ```
 node_modules/.bin/webpack
 ```
-
-<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416203150892.png" alt="image-20210416203150892" style="zoom:50%;" />
 
 补充：
 
@@ -343,6 +343,8 @@ loader使用过程：
 - 步骤二：在webpack.config.js中的modules关键字下进行配置
 
 大部分loader我们都可以在webpack的官网中找到，并且学习对应的用法。
+
+> https://webpack.js.org/concepts/
 
 ### css-loader、style-loader
 
