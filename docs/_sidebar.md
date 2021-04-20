@@ -19,5 +19,7 @@
   - [模块化开发](Vue/模块化开发.md)
   - [Webpack](Vue/Webpack.md)
   - [VueCLI](Vue/VueCLI.md)
+  - [vue-router](Vue/vue-router.md)
+  - [Promise](Vue/Promise.md)
   
 - 
