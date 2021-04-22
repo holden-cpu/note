@@ -21,5 +21,5 @@
   - [VueCLI](Vue/VueCLI.md)
   - [vue-router](Vue/vue-router.md)
   - [Promise](Vue/Promise.md)
-  
-- 
+  - [Vuex](Vue/Vuex.md)
+  - [axios](Vue/axios.md)
