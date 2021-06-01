@@ -9,7 +9,7 @@
 如果你在开发大型项目, 那么你需要, 并且必然需要使用Vue CLI
 
 - 使用Vue.js开发大型应用时，我们需要考虑代码目录结构、项目结构和部署、热加载、代码单元测试等事情。
-- 如果每个项目都要手动完成这些工作，那无以效率比较低效，所以通常我们会使用一些脚手架工具来帮助完成这些事情。
+- 如果每个项目都要手动完成这些工作，那无疑效率比较低效，所以通常我们会使用一些脚手架工具来帮助完成这些事情。
 
 CLI是什么意思?
 
@@ -58,7 +58,7 @@ npm install -g @vue/cli
 
 注意：上面安装的是Vue CLI最新的版本（4.5.12），如果需要想按照Vue CLI2的方式初始化项目时不可以的。
 
-![image-20210417194252159](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210417194252159.png)
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210417194252159.png" alt="image-20210417194252159" style="zoom:150%;" />
 
 Vue CLI2初始化项目
 

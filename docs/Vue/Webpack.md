@@ -17,7 +17,7 @@ At its core, webpack is a static module bundler for modern JavaScript applicatio
   而且也提到了目前使用前端模块化的一些方案：AMD、CMD、CommonJS、ES6。
   在ES6之前，我们要想进行模块化开发，就必须借助于其他的工具，让我们可以进行模块化开发。
   并且在通过模块化开发完成了项目后，还需要处理模块间的各种依赖，并且将其进行整合打包。
-  而webpack其中一个核心就是让我们可能进行模块化开发，并且会帮助我们处理模块间的依赖关系。
+- 而webpack其中一个核心就是让我们可能进行模块化开发，并且会帮助我们处理模块间的依赖关系。
   而且不仅仅是JavaScript文件，我们的CSS、图片、json文件等等在webpack中都可以被当做模块来使用（在后续我们会看到）。
   这就是webpack中模块化的概念。
 
@@ -25,7 +25,7 @@ At its core, webpack is a static module bundler for modern JavaScript applicatio
 
 - 理解了webpack可以帮助我们进行模块化，并且处理模块间的各种复杂关系后，打包的概念就非常好理解了。
   就是将webpack中的各种资源模块进行打包合并成一个或多个包(Bundle)。
-  并且在打包的过程中，还可以对资源进行处理，比如压缩图片，将scss转成css，将ES6语法转成ES5语法，将TypeScript转成JavaScript等等操作。
+- 并且在打包的过程中，还可以对资源进行处理，比如压缩图片，将scss转成css，将ES6语法转成ES5语法，将TypeScript转成JavaScript等等操作。
   但是打包的操作似乎grunt/gulp也可以帮助我们完成，它们有什么不同呢？
 
 ### 和grunt/gulp的对比
@@ -144,7 +144,7 @@ webpack ./src/main.js ./dist/bundle.js
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210416181755493.png" alt="image-20210416181755493" style="zoom: 80%;" />
 
-打包后会在dist文件下，生成一个bundle.js文件
+打包后会在dist文件夹下，生成一个bundle.js文件
 
 - bundle.js文件，是webpack处理了项目直接文件依赖后生成的一个js文件，我们只需要将这个js文件在index.html中引入即可
 
@@ -229,7 +229,11 @@ D:\AWorkSpace\IdeaWorkSpace\VueDemo\webpack\webpack配置>
 
 ```
 
-在node开发中使用npm init会生成一个pakeage.json文件，这个文件主要是用来记录这个项目的详细信息的，它会将我们在项目开发中所要用到的包，以及项目的详细信息等记录在这个项目中。方便在以后的版本迭代和项目移植的时候会更加的方便。也是防止在后期的项目维护中误删除了一个包导致的项目不能够正常运行。使用npm init初始化项目还有一个好处就是在进行项目传递的时候不需要将项目依赖包一起发送给对方，对方在接受到你的项目之后再执行npm install就可以将项目依赖全部下载到项目里。
+在node开发中使用npm init会生成一个pakeage.json文件，这个文件主要是用来记录这个项目的详细信息的，它会将我们在项目开发中所要用到的包，以及项目的详细信息等记录在这个项目中。
+
+方便在以后的版本迭代和项目移植的时候会更加的方便。也是防止在后期的项目维护中误删除了一个包导致的项目不能够正常运行。
+
+使用npm init初始化项目还有一个好处就是在进行项目传递的时候不需要将项目依赖包一起发送给对方，对方在接受到你的项目之后再执行npm install就可以将项目依赖全部下载到项目里。
 
 根据package.json中的依赖需求，生成对应的依赖
 
@@ -262,10 +266,15 @@ package.json
 ### 局部安装webpack
 
 目前，我们使用的webpack是全局的webpack，如果我们想使用局部来打包呢？
+
 因为一个项目往往依赖特定的webpack版本，全局的版本可能很这个项目的webpack版本不一致，导出打包出现问题。
+
 所以通常一个项目，都有自己局部的webpack。
+
 第一步，项目中需要安装自己局部的webpack
+
 这里我们让局部安装webpack3.6.0
+
 Vue CLI3中已经升级到webpack4，但是它将配置文件隐藏了起来，所以查看起来不是很方便。
 
 ```
@@ -300,7 +309,8 @@ package.json中的scripts的脚本在执行时，会按照一定的顺序寻找�
 
 - 如果没有找到，会去全局的环境变量中寻找。
 
-- 如何执行我们的build指令呢？
+
+如何执行我们的build指令呢？
 
 ```
 npm run build

@@ -124,12 +124,15 @@ export default store
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210422090626646.png" alt="image-20210422090626646" style="zoom:50%;" />
 
-我们来对使用步骤，做一个简单的小节：
-1.提取出一个公共的store对象，用于保存在多个组件中共享的状态
-2.将store对象放置在new Vue对象中，这样可以保证在所有的组件中都可以使用到
-3.在其他组件中使用store对象中保存的状态即可
-通过this.$store.state.属性的方式来访问状态
-通过this.$store.commit('mutation中方法')来修改状态
+我们来对使用步骤，做一个简单的小结：
+
+1. 提取出一个公共的store对象，用于保存在多个组件中共享的状态
+2. 将store对象放置在new Vue对象中，这样可以保证在所有的组件中都可以使用到
+3. 在其他组件中使用store对象中保存的状态即可
+
+通过this.\$store.state.属性的方式来访问状态
+通过this.\$store.commit('mutation中方法')来修改状态
+
 注意事项：
 我们通过提交mutation的方式，而非直接改变store.state.count。
 这是因为Vuex可以更明确的追踪状态的变化，所以不要直接改变store.state.count的值。

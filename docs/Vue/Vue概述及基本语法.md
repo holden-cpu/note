@@ -27,11 +27,11 @@
 
 - CDN引入
 
-> <!-- 开发环境版本，包含了有帮助的命令行警告 -->  
+> 开发环境版本，包含了有帮助的命令行警告 
 >
->  <!-- 生产环境版本，优化了尺寸和速度 -->
+>   生产环境版本，优化了尺寸和速度 
 >
->  <script src="https://cdn.jsdelivr.net/npm/vue"></script> 
+>  \<script src="https://cdn.jsdelivr.net/npm/vue">\</script> 
 
 - 下载引入
 
@@ -181,19 +181,19 @@
 
 - View层： 
 
-- - 视图层 在我们前端开发中，通常就是DOM层。
+  - 视图层 在我们前端开发中，通常就是DOM层。
   - 主要的作用是给用户展示各种信息。
 
--  Model层： 
+- Model层： 
 
-- - 数据层 数据可能是我们固定的死数据，更多的是来自我们服务器，从网络上请求下来的数据。
+  - 数据层 数据可能是我们固定的死数据，更多的是来自我们服务器，从网络上请求下来的数据。
   - 在我们计数器的案例中，就是后面抽取出来的obj，当然，里面的数据可能没有这么简单。
 
--  VueModel层： 
+- VueModel层： 
 
-- - 视图模型层 
+  - 视图模型层 
   - 视图模型层是View和Model沟通的桥梁。
-  -  一方面它实 现了Data Binding，也就是数据绑定，将Model的改变实时的反应到View中 
+  - 一方面它实 现了Data Binding，也就是数据绑定，将Model的改变实时的反应到View中 
   - 另一方面它实现了DOM Listener，也就是DOM监听，当DOM发生一些事件(点击、滚动、touch等)时，可以监听到，并在需要的情况下改变对应的Data。 
 
 
@@ -320,7 +320,7 @@
 
 ### v-pre: {{}}
 
-- v-pre用于跳过这个元素zz和它子元素的编译过程，用于显示原本的Mustache语法。
+- v-pre用于跳过这个元素zz和它子元素的编译过程，用于显示原本的Mustache语法。跳过大量没有指令的节点会加快编译。
 
 ```vue
 <div id="app">
@@ -341,9 +341,10 @@
 
 ### v-cloak: 斗篷
 
-- 在某些情况下，我们浏览器可能会直接显然出未编译的Mustache标签。 
+- 在某些情况下，我们浏览器可能会直接显示出未编译的Mustache标签。 
+- 这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 `[v-cloak] { display: none }` 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
 
-```
+```vue
   <style>
     [v-cloak] {
       display: none;
@@ -379,7 +380,7 @@
 
 - v-bind:src
 - :href
-- <!-- 动态参数的缩写 (2.6.0+) --> <a :[key]="url"> ... </a>
+- 动态参数的缩写 (2.6.0+) ——\<a :[key]="url"> ... \</a>
 
 ```vue
 <div id="app">
@@ -546,7 +547,8 @@
 
 在某些情况，我们可能需要对数据进行一些转化后再显示，或者需要将多个数据结合起来进行显示
 
-- 案例一: firstName+lastName
+案例一: firstName+lastName
+
 - 将上面的代码换成计算属性
 
 ```vue
@@ -582,7 +584,8 @@
 </script>
 ```
 
-- 案例二: books -> price
+案例二: books -> price
+
 - 复杂的操作
 
 ```vue
@@ -1012,8 +1015,8 @@ ES6中，对对象字面量进行了很多增强。
 
 - v-on也有对应的语法糖： 
 
-- - v-on:click可以写成@click 
-  - ![image.png](https://cdn.nlark.com/yuque/0/2021/png/12731578/1615814464262-20fd58c9-9c3c-4045-a3ba-f7dd946e1f73.png)
+  - v-on:click可以写成@click 
+  - ![image.png](https://note-java.oss-cn-beijing.aliyuncs.com/img/1615814464262-20fd58c9-9c3c-4045-a3ba-f7dd946e1f73.png)
 
 ### v-on参数 
 
