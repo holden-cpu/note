@@ -9,7 +9,7 @@ echo 当前目录是：%cd%
 echo 开始添加变更
 
 
-git add -A .
+git add .
 
 
 echo 提交变更到本地仓库
@@ -23,17 +23,7 @@ echo 将变更情况提交到远程github服务器
 
 
 
-git push github master
-
-
-echo 将变更情况提交到远程gitee服务器
-
-
-git push gitee master
-
-
-
-echo 批处理执行完毕！
+git push 
 
 
 
