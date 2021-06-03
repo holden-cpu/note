@@ -241,12 +241,12 @@ export default {
 </style>
 ```
 
-<router-link>: 该标签是一个vue-router中已经内置的组件, 它会被渲染成一个<a>标签.
+`<router-link>` ：该标签是一个vue-router中已经内置的组件, 它会被渲染成一个`<a>`标签.
 
-<router-view>: 该标签会根据当前的路径, 动态渲染出不同的组件.
-网页的其他内容, 比如顶部的标题/导航, 或者底部的一些版权信息等会和<router-view>处于同一个等级.
+`<router-view>`： 该标签会根据当前的路径, 动态渲染出不同的组件.
+网页的其他内容, 比如顶部的标题/导航, 或者底部的一些版权信息等会和`<router-view>`处于同一个等级.
 
-在路由切换时, 切换的是<router-view>挂载的组件, 其他内容不会发生改变。
+在路由切换时, 切换的是`<router-view>`挂载的组件, 其他内容不会发生改变。
 
 挂载到Vue实例中，main.js
 
@@ -268,7 +268,7 @@ new Vue({
 
 ### **路由的默认路径**
 
-默认情况下, 进入网站的首页, 我们希望<router-view>渲染首页的内容.
+默认情况下, 进入网站的首页, 我们希望`<router-view>`渲染首页的内容.
 
 index.js，多配置一个映射
 
@@ -297,7 +297,7 @@ const routes = [
 
 - URL的hash
 - HTML5的history
-- 默认情况下, 路径的改变使用的URL的hash.
+- 默认情况下, 路径的改变使用URL的hash.
 
 index.js
 
@@ -311,18 +311,18 @@ const router = new VueRouter({
 
 ### router-link补充
 
-在前面的<router-link>中, 我们只是使用了一个属性: to, 用于指定跳转的路径.
+在前面的`<router-link>`中, 我们只是使用了一个属性: to, 用于指定跳转的路径.
 
-<router-link>还有一些其他属性:
+`<router-link>`还有一些其他属性:
 
-- tag: tag可以指定<router-link>之后渲染成什么组件, 比如下面的代码会被渲染成一个<li>元素, 而不是<a>
+- tag: tag可以指定`<router-link>`之后渲染成什么组件, 比如下面的代码会被渲染成一个`<li>`元素, 而不是`<a>`
 
 ```js
 <router-link to='/home' tag='li'>
 ```
 
-- replace: replace不会留下history记录, 所以指定replace的情况下, 后退键返回不能返回到上一个页面中。默认使用push
-- active-class: 当<router-link>对应的路由匹配成功时, 会自动给当前元素设置一个router-link-active的class, 设置active-class可以修改默认的名称.
+- replace： replace不会留下history记录, 所以指定replace的情况下, 后退键返回不能返回到上一个页面中。默认使用push
+- active-class： 当`<router-link>`对应的路由匹配成功时, 会自动给当前元素设置一个`router-link-active`的class, 设置active-class可以修改默认的名称.
   - 在进行高亮显示的导航菜单或者底部tabbar时, 会使用到该类.
   - index.js route实例添加 linkActiveClass属性统一修改
   - 但是通常不会修改类的属性, 会直接使用默认的router-link-active即可. 
@@ -527,7 +527,7 @@ const Home = () => import('../components/Home.vue')
 
 - 创建对应的子组件, 并且在路由映射中配置对应的子路由.
 
-- 在组件内部使用<router-view>标签.
+- 在组件内部使用`<router-view>`标签.
 
 ### 嵌套路由实现
 
@@ -564,7 +564,7 @@ HomeNews.vue
 
 index.js
 
-```
+```js
 // 2.创建VueRouter对象
 const routes = [
   {
@@ -618,7 +618,7 @@ Home.vue
 
 第二步: 配置路由映射 
 
-第三步: 添加跳转的<router-link> 
+第三步: 添加跳转的`<router-link> `
 
 ### 传递参数的方式
 
@@ -636,7 +636,7 @@ query的类型:
 - 传递的方式: 对象中使用query的key作为传递方式
 - 传递后形成的路径: /router?id=123, /router?id=abc
 
-**方式一: <router-link>**
+**方式一: `<router-link>`**
 
 Profile.vue
 
@@ -672,8 +672,8 @@ $route为当前router跳转对象里面可以获取name、path、query、params�
 
 我们来考虑一个需求: 在一个SPA应用中, 如何改变网页的标题呢?
 
-- 网页标题是通过<title>来显示的, 但是SPA只有一个固定的HTML, 切换不同的页面时, 标题并不会改变.
-- 但是我们可以通过JavaScript来修改<title>的内容.window.document.title = '新的标题'.
+- 网页标题是通过`<title>`来显示的, 但是SPA只有一个固定的HTML, 切换不同的页面时, 标题并不会改变
+- 但是我们可以通过JavaScript来修改`<title>`的内容`.window.document.title = '新的标题'`
 - 那么在Vue项目中, 在哪里修改? 什么时候修改比较合适呢?
 
 普通的修改方式:
@@ -765,7 +765,7 @@ router-view 也是一个组件，如果直接被包在 keep-alive 里面，所�
    - 安装路由：npm install vue-router —save
    - 完成router/index.js的内容，以及创建对应的组件
    - main.js中注册router
-   - APP中加入<router-view>组件
+   - APP中加入`<router-view>`组件
 
 6. 点击item跳转到对应路由，并且动态决定isActive
 

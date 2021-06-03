@@ -3778,7 +3778,7 @@ public class ReceiveMessageListenerController
 
 比如在如下场景中，订单系统我们做集群部署，都会从RabbitMQ中获取订单信息，那如果==一个订单同时被两个服务获取到==，那么就会造成数据错误，我们得避免这种情况。这时我们就可以==使用Stream中的消息分组来解决==。
 
-![image-20210509210739265](C:%5CUsers%5C98449%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210509210739265.png)
+![image-20210509210739265](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210509210739265.png)
 
 注意在Stream中处于同一个group中的多个消费者是竞争关系，就能够保证消息只会被其中一个应用消费一次。不同组是可以全面消费的(重复消费)。
 
