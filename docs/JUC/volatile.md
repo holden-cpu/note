@@ -127,7 +127,7 @@ public class VolatileDemo {
 }
 ```
 
-注意使用jdk8 32位不能实现效果（原因没查到），main线程会顺利执行完。
+> 注意使用jdk8 32位不能实现效果（原因没查到），main线程会顺利执行完。
 
 ![image-20210721224636133](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210721224636133.png)
 
@@ -779,7 +779,7 @@ Volatile实现<font color='red'>禁止指令重排优化</font>，从而避免�
 
 由于编译器和处理器都能执行指令重排的优化，如果在指令间插入一条Memory Barrier则会告诉编译器和CPU，不管什么指令都不能和这条Memory Barrier指令重排序，也就是说<font color='red'>通过插入内存屏障禁止在内存屏障前后的指令执行重排序优化</font>。 内存屏障另外一个作用是刷新出各种CPU的缓存数，因此任何CPU上的线程都能读取到这些数据的最新版本。
 
-![image-20200310162654437](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20200310162654437.png)
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20200310162654437.png" alt="image-20200310162654437" style="zoom:150%;" />
 
 也就是过在Volatile的写 和 读的时候，加入屏障，防止出现指令重排的
 

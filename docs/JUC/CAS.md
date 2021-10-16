@@ -6,7 +6,7 @@ CAS的全称是Compare-And-Swap，它是<font color='red'>CPU并发原语</font>
 
 它的功能是判断内存某个位置的值是否为预期值，如果是则更改为新的值，这个过程是原子的
 
-CAS并发原语体现在Java语言中就是sun.misc.Unsafe类的各个方法。调用UnSafe类中的CAS方法，JVM会帮我们实现出<font color='red'>CAS汇编指令</font>，这是一种完全依赖于<font color='red'>硬件</font>的功能，通过它实现了原子操作，再次强调，由于CAS是一种系统原语，原语属于操作系统用于范畴，是由若干条指令组成，用于完成某个功能的一个过程，并且原语的执行必须是连续的，<font color='red'>在执行过程中不允许被中断，也就是说CAS是一条CPU的原子指令，不会造成所谓的数据不一致的问题，也就是说CAS是线程安全的。</font>
+CAS并发原语体现在Java语言中就是 sun.misc.Unsafe 类的各个方法。调用UnSafe类中的CAS方法，JVM会帮我们实现出<font color='red'>CAS汇编指令</font>，这是一种完全依赖于<font color='red'>硬件</font>的功能，通过它实现了原子操作，再次强调，由于CAS是一种系统原语，原语属于操作系统用于范畴，是由若干条指令组成，用于完成某个功能的一个过程，并且原语的执行必须是连续的，<font color='red'>在执行过程中不允许被中断，也就是说CAS是一条CPU的原子指令，不会造成所谓的数据不一致的问题，也就是说CAS是线程安全的。</font>
 
 ## 代码使用
 
@@ -437,11 +437,11 @@ public void add(long x) {
 
 于是，当当当当，Java 8推出了一个新的类，**LongAdder**，他就是尝试使用分段CAS以及自动分段迁移的方式来大幅度提升多线程高并发执行CAS操作的性能！
 
-![image-20200429085141487](https://gitee.com/moxi159753/LearningNotes/raw/master/校招面试/JUC/3_谈谈原子类的ABA问题/6_原子类AtomicInteger的ABA问题/images/image-20200429085141487.png)
+<img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20200429085141487.png" alt="image-20200429085141487" style="zoom:150%;" />
 
 在LongAdder的底层实现中，首先有一个base值，刚开始多线程来不停的累加数值，都是对base进行累加的，比如刚开始累加成了base = 5。
 
-接着如果发现并发更新的线程数量过多，在发生竞争的情况下，会有一个Cell数组用于将不同线程的操作离散到不同的节点上去 ==(会根据需要扩容，最大为CPU核）==就会开始施行**分段CAS的机制**，也就是内部会搞一个Cell数组，每个数组是一个数值分段。
+接着如果发现并发更新的线程数量过多，在发生竞争的情况下，会有一个Cell数组用于将不同线程的操作离散到不同的节点上去 (会根据需要扩容，最大为CPU核）就会开始施行**分段CAS的机制**，也就是内部会搞一个Cell数组，每个数组是一个数值分段。
 
 这时，让大量的线程分别去对不同Cell内部的value值进行CAS累加操作，这样就把CAS计算压力分散到了不同的Cell分段数值中了！
 

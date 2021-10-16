@@ -2348,3 +2348,349 @@ $ docker build -t xxxxx:xx  .
 ```
 
 ![image-20210627111032618](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210627111032618.png)
+
+# 整合mysql
+
+https://www.cnblogs.com/ybyn/p/13698058.html
+
+`docker run -p 3306:3306 --name guli_edu_mysql -v /docker/guli_edu/mysql/conf:/etc/mysql -v /docker/guli_edu/mysql/data:/var/lib/mysql -v /docker/guli_edu/mysql/logs:/var/log/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
+
+my.cnf
+
+```
+[client]
+
+#socket = /usr/mysql/mysqld.sock
+
+default-character-set = utf8mb4
+
+[mysqld]
+
+#pid-file        = /var/run/mysqld/mysqld.pid
+
+#socket          = /var/run/mysqld/mysqld.sock
+
+#datadir         = /var/lib/mysql
+
+#socket = /usr/mysql/mysqld.sock
+
+#pid-file = /usr/mysql/mysqld.pid
+
+# 禁用dns解析，所以在mysql的授权表中就不能使用主机名了，只能使用IP
+skip-name-resolve
+# # mysql8的安全机制升级而需要修改的配置，不配置的话将无法登录管理
+default_authentication_plugin= mysql_native_password
+
+datadir = /docker/guli_edu/mysql/data
+
+character_set_server = utf8mb4
+
+collation_server = utf8mb4_bin
+
+secure-file-priv= NULL
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+
+symbolic-links=0
+
+# Custom config should go here
+# includedir /etc/mysql/conf.d/
+```
+
+![image-20210825112654054](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210825112654054.png)
+
+```
+[root@holden mysql]# docker inspect guli_edu_mysql 
+[
+    {
+        "Id": "ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0",
+        "Created": "2021-08-25T03:22:59.335668495Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "mysqld"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 3139,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2021-08-25T03:22:59.75208815Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:5a4e492065c722ec8cc7413552bafc6fd5434c5ad90797e898ccc4e347e21aa5",
+        "ResolvConfPath": "/var/lib/docker/containers/ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0/hostname",
+        "HostsPath": "/var/lib/docker/containers/ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0/hosts",
+        "LogPath": "/var/lib/docker/containers/ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0/ca049874fda13c44daf1c2ecb53dd1bb01fec99414e16622682308c80f4437b0-json.log",
+        "Name": "/guli_edu_mysql",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/docker/guli_edu/mysql/conf:/etc/mysql",
+                "/docker/guli_edu/mysql/data:/var/lib/mysql",
+                "/docker/guli_edu/mysql/logs:/var/log/mysql"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "3306/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "3306"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "always",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/cc7d19e61a9a9cdad6c6562c52dff71d2e228169d006cd232ed825a1217d842a-init/diff:/var/lib/docker/overlay2/48651d417f7865fa464d124cf73fa0db7fd30aca09a60d6811f8af6cc39d56a5/diff:/var/lib/docker/overlay2/e5e56f1f12aea433ed9ea528c6084e0a3cf6fd216d0db4f2f135c15d5ae17569/diff:/var/lib/docker/overlay2/367bade29abd2be7fb5067989ed883b4f351a2574c8ce98b18c77c6ef3065b90/diff:/var/lib/docker/overlay2/eca1a599acecebead9f17287023de15cf99239850c0e7c7e1ac4b5c3e410495b/diff:/var/lib/docker/overlay2/c8bcfc3ba5546b20a0fca3fff1825a3308720873b6319c943364eb1c2f43ca5f/diff:/var/lib/docker/overlay2/a3621d6262673dc63ca35f3f72c5f49f4d13bb788972a710d06956405af68d27/diff:/var/lib/docker/overlay2/0c1dd7f5e02afb7ad57ca8cfe619f1e01e687fd1e348cbc803315b8807ddaedd/diff:/var/lib/docker/overlay2/3ad8c71d8c2046eb4617c0ff3cda3310d43c394f229f6e2bd55f8001e94589b6/diff:/var/lib/docker/overlay2/02d4dc5ac2accc5121265dd83ca3efa1bf51ad8b946fea6a4497fd653df26eee/diff:/var/lib/docker/overlay2/46cdbe9d9c70976e62b497d9cc357dffe552105642e8f36f40ec3cd99c7f5f6c/diff:/var/lib/docker/overlay2/57c5e990e581c4d1705e14223a40cbec422c30d59df329bb979cdd89cd736d77/diff:/var/lib/docker/overlay2/be76d3d236ea3c6cdb8dc16bf422870bb7e30425b025478ed7dce70a186dbc78/diff",
+                "MergedDir": "/var/lib/docker/overlay2/cc7d19e61a9a9cdad6c6562c52dff71d2e228169d006cd232ed825a1217d842a/merged",
+                "UpperDir": "/var/lib/docker/overlay2/cc7d19e61a9a9cdad6c6562c52dff71d2e228169d006cd232ed825a1217d842a/diff",
+                "WorkDir": "/var/lib/docker/overlay2/cc7d19e61a9a9cdad6c6562c52dff71d2e228169d006cd232ed825a1217d842a/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/docker/guli_edu/mysql/conf",
+                "Destination": "/etc/mysql",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/docker/guli_edu/mysql/data",
+                "Destination": "/var/lib/mysql",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/docker/guli_edu/mysql/logs",
+                "Destination": "/var/log/mysql",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "ca049874fda1",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "MYSQL_ROOT_PASSWORD=123456",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.12",
+                "MYSQL_MAJOR=8.0",
+                "MYSQL_VERSION=8.0.26-1debian10"
+            ],
+            "Cmd": [
+                "mysqld"
+            ],
+            "Image": "mysql",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "144024eb500b5a8cfd0824963f3b9301af4697393b7dfb3765486695ebd80d36",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "3306/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "3306"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "3306"
+                    }
+                ],
+                "33060/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/144024eb500b",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "ca860733329ddf19f595d3a261698240338f98fb535928258199826cdb2ee8e2",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "48915a3c52ad0bab6457e0fb1593fcfab9796de428e61cba24cb7760f4016b63",
+                    "EndpointID": "ca860733329ddf19f595d3a261698240338f98fb535928258199826cdb2ee8e2",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
+```
+
+# 整合nignx
+
+![image-20210825134247611](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210825134247611.png)
+
+```
+docker run -d --name guli_edu_nginx -p 9001:80 -v /docker/guli_edu/nginx/conf:/etc/nginx -v /docker/guli_edu/nginx/html:/usr/share/nginx/html nginx
+```
+
+## 配置反向代理
+
+进入`conf/conf.d/default.conf`
+
+![image-20210825134409218](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210825134409218.png)
+
+# 整合redis
+
+```
+docker run -p 6379:6379 --name guli_edu_redis -v /docker/guli_edu/redis/redis.conf:/etc/redis/redis.conf -v /docker/guli_edu/redis/data:/data -d  redis redis-server /etc/redis/redis.conf --appendonly yes
+```
+
+`docker exec -it guli_edu_redis /bin/bash`
+
+`redis-cli`
+
+# nacos
+
+https://blog.csdn.net/u012437781/article/details/100630864
+
+```
+docker run -d -p 8848:8848 --env MODE=standalone  --name nacos  nacos/nacos-server
+```
+

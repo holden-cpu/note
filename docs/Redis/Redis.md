@@ -1,10 +1,6 @@
 typora-root-url: ..\..
 
 
-
-
-
-
 https://www.bilibili.com/video/BV1Rv41177Af?p=2&spm_id_from=pageDriver
 
 命令中文文档：http://www.redis.cn/commands.html#
@@ -21,9 +17,7 @@ https://www.bilibili.com/video/BV1Rv41177Af?p=2&spm_id_from=pageDriver
 
 ### 1.1.1 Web1.0时代
 
-Web1.0的时代，数据访问量很有限，用一夫当关的高性能的单点服务器可以解决大部分问题。
-
-![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/wps1.jpg) 
+Web1.0的时代，数据访问量很有限，用一夫当关的高性能的单点服务器可以解决大部分问题。 
 
  
 
@@ -1986,7 +1980,7 @@ http://doc.redisfans.com/transaction/exec.html
 - 事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚 
 
 
- 
+
 
 # 11. Redis\_事务\_秒杀案例
 
@@ -2424,7 +2418,7 @@ bgsave：Redis会在后台异步进行快照操作， 快照同时还可以响�
 
 执行flushall命令，也会产生dump.rdb文件，但里面是空的，无意义
 
-#### 12.2.8.4 ##SNAPSHOTTING快照##
+#### 12.2.8.4 SNAPSHOTTING快照
 
 #### 12.2.8.5 Save
 
@@ -3071,15 +3065,7 @@ redis-cli --cluster create --cluster-replicas 1 192.168.11.101:6379 192.168.11.1
 
 ## 15.9 什么是slots
 
-[OK] Alnodes agree about slots configuration.
-
->>> Check for open slots...
-
->>> Check slots coverage...
-
-[OK] All16384slots covered.
-
-一个 Redis 集群包含 <font color='red'>16384 个插槽</font>（hash slot）， 数据库中的` 
+一个 Redis 集群包含 <font color='red'>16384 个插槽</font>（hash slot）， 数据库中的
 
 集群使用公式` CRC16(key) % 16384 `来计算键 key 属于哪个槽， 其中 CRC16(key) 语句用于计算键 key 的 CRC16 校验和 。
 
@@ -3310,8 +3296,6 @@ XX ：只在键已经存在时，才对键进行设置操作。
 2. 获取成功，执行业务逻辑{从db获取数据，放入缓存}，执行完成释放锁（del）
 
 3. 其他客户端等待重试
-
- 
 
 ### 16.4.3 编写代码
 
@@ -3556,8 +3540,6 @@ testLock();
 - <font color='red'>解铃还须系铃人</font>。加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。
 
 - <font color='red'>加锁和解锁必须具有原子性</font>。
-
-
 
 # 17. Redis6.0新功能
 

@@ -323,9 +323,9 @@ AP——满足可用性，分区容错性的系统，通常可能对一致性要
 
 ### 概述
 
-Spring Cloud Ribbon是基于Netflix Ribbon实现的一套==客户端负载均衡的工具。==
+Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。
 
-简单的说，Ribbon是Netflix发布的开源项目，主要功能是==提供客户端的软件负载均衡算法和服务调用==。Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。
+简单的说，Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法和服务调用。Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。
 
 简单的说，就是在配置文件中列出Load Balancer(简称LB)后面所有的机器，Ribbon会自动的帮助你基于某种规则(如简单轮询，随机连接等）去连接这些机器。我们很容易使用Ribbon实现自定义的负载均衡算法。
 
@@ -354,7 +354,7 @@ Ribbon本地负载均衡，在调用微服务接口时候，会在注册中心�
 
 将LB逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己再从这些地址中选择出一个合适的服务器。
 
-==Ribbon就属于进程内LB==，它只是一个类库，集成于消费方进程，消费方通过它来获取到服务提供方的地址。
+Ribbon就属于进程内LB，它只是一个类库，集成于消费方进程，消费方通过它来获取到服务提供方的地址。
 
 **一句话**：负载均衡 + RestTemplate调用
 
@@ -614,7 +614,7 @@ public class OrderController {
     @GetMapping(value = "/consumer/payment/lb")
     public String getPaymentLB() {
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-        if (instances == null || instances.size() <= 0) {
+        if (instances  null || instances.size() <= 0) {
             return null;
         }
         ServiceInstance serviceInstance = loadBalancer.instances(instances);
@@ -741,7 +741,6 @@ public interface PaymentFeignService
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id);
 
 }
-
 ```
 
 OrderFeignController.java
@@ -769,7 +768,7 @@ public class OrderFeignController
 - 再启动2个微服务8001/8002
 - 启动OpenFeign启动
 - http://localhost/consumer/payment/get/1
-- ==Feign自带负载均衡配置项==
+- <font color='red'>Feign自带负载均衡配置项</font>
 
 ### OpenFeign超时控制
 
@@ -885,7 +884,7 @@ Feign提供了日志打印功能，我们可以通过配置来调整日志级别
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+ 
 @Configuration
 public class FeignConfig
 {
@@ -921,7 +920,7 @@ logging:
 
 #### **服务雪崩**
 
-多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“==雪崩效应==”。
+多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“<font color='red'>雪崩效应</font>”。
 
 对于高流量的应用来说，单一的后避依赖可能会导致所有服务器上的所有资源都在几秒钟内饱和。比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其他系统资源紧张，导致整个系统发生更多的级联故障。这些都表示需要对故障和延迟进行隔离和管理，以便单个依赖关系的失败，不能取消整个应用程序或系统。
 
@@ -929,9 +928,9 @@ logging:
 
 #### Hystrix是什么
 
-Hystrix是一个用于处理分布式系统的==延迟==和==容错==的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时、异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，==避免级联故障，以提高分布式系统的弹性==。
+Hystrix是一个用于处理分布式系统的<font color='red'>延迟</font>和<font color='red'>容错</font>的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时、异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，<font color='red'>避免级联故障，以提高分布式系统的弹性</font>。
 
-”断路器“本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝)，==向调用方返回一个符合预期的、可处理的备选响应（FallBack)，而不是长时间的等待或者抛出调用方无法处理的异常==，这样就保证了服务调用方的线程不会被长时间、不必要地占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩。
+”断路器“本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝)，<font color='red'>向调用方返回一个符合预期的、可处理的备选响应（FallBack)，而不是长时间的等待或者抛出调用方无法处理的异常，</font>这样就保证了服务调用方的线程不会被长时间、不必要地占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩。
 
 **Hystrix功能**
 
@@ -1312,7 +1311,7 @@ http://localhost/consumer/payment/hystrix/ok/1
 
 ### 服务降级
 
-降级配置 - ==@HystrixCommand==
+降级配置 - @HystrixCommand
 
 8001先从自身找问题
 
@@ -1462,7 +1461,7 @@ public class OrderHystirxController {
 
 1:N 除了个别重要核心业务有专属，其它普通的可以通过@DefaultProperties(defaultFallback = “”)统一跳转到统一处理结果页面
 
-==通用的和独享的各自分开，避免了代码膨胀，合理减少了代码量==
+通用的和独享的各自分开，避免了代码膨胀，合理减少了代码量
 
 ```java
 @RestController
@@ -1505,9 +1504,9 @@ public class OrderHystirxController {
 
 **解决方法2**
 
-==服务降级，客户端去调用服务端，碰上服务端宕机或关闭==
+<font color='red'>服务降级，客户端去调用服务端，碰上服务端宕机或关闭</font>
 
-本次案例服务降级处理是在==客户端80实现==完成的，与服务端8001没有关系，只需要为Feign客户端定义的接口添加一个服务降级处理的实现类即可实现解耦
+本次案例服务降级处理是<font color='red'>在客户端80实现</font>完成的，与服务端8001没有关系，只需要为Feign客户端定义的接口添加一个服务降级处理的实现类即可实现解耦
 
 未来我们要面对的异常
 
@@ -1590,9 +1589,9 @@ public interface PaymentHystrixService
 
 #### 熔断机制概述
 
-熔断机制是应对雪崩效应的一种微服务链路保护机制。当扇出链路的某个微服务出错不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回错误的响应信息。==当检测到该节点微服务调用响应正常后，恢复调用链路。==
+熔断机制是应对雪崩效应的一种微服务链路保护机制。当扇出链路的某个微服务出错不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回错误的响应信息。<font color='red'>当检测到该节点微服务调用响应正常后，恢复调用链路</font>。
 
-在Spring Cloud框架里，熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败，就会启动熔断机制。熔断机制的注解是==@HystrixCommand==。
+在Spring Cloud框架里，熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败，就会启动熔断机制。熔断机制的注解是`@HystrixCommand`。
 
 > Martin Fowler论文 https://martinfowler.com/bliki/CircuitBreaker.html
 
@@ -1608,7 +1607,7 @@ public class PaymentService{
 
     ...
     
-    //=====服务熔断
+    //=服务熔断
     @HystrixCommand(fallbackMethod = "paymentCircuitBreaker_fallback",commandProperties = {
             @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),// 是否开启断路器
             @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),// 请求次数
@@ -1633,11 +1632,11 @@ public class PaymentService{
 
 The precise way that the circuit opening and closing occurs is as follows:
 
-1. Assuming the volume across a circuit meets a certain threshold : ==HystrixCommandProperties.circuitBreakerRequestVolumeThreshold()==
-2. And assuming that the error percentage, as defined above exceeds the error percentage defined in : ==HystrixCommandProperties.circuitBreakerErrorThresholdPercentage()==
+1. Assuming the volume across a circuit meets a certain threshold : HystrixCommandProperties.circuitBreakerRequestVolumeThreshold()
+2. And assuming that the error percentage, as defined above exceeds the error percentage defined in : HystrixCommandProperties.circuitBreakerErrorThresholdPercentage()
 3. Then the circuit-breaker transitions from CLOSED to OPEN.
 4. While it is open, it short-circuits all requests made against that circuit-breaker.
-5. After some amount of time ==(HystrixCommandProperties.circuitBreakerSleepWindowInMilliseconds()==), the next request is let through. If it fails, the command stays OPEN for the sleep window. If it succeeds, it transitions to CLOSED and the logic in 1) takes over again.
+5. After some amount of time (HystrixCommandProperties.circuitBreakerSleepWindowInMilliseconds()), the next request is let through. If it fails, the command stays OPEN for the sleep window. If it succeeds, it transitions to CLOSED and the logic in 1) takes over again.
 
 PaymentController.java
 
@@ -1651,7 +1650,7 @@ public class PaymentController
 
     ...
     
-    //====服务熔断
+    //服务熔断
     @GetMapping("/payment/circuit/{id}")
     public String paymentCircuitBreaker(@PathVariable("id") Integer id)
     {
@@ -1686,7 +1685,7 @@ public class PaymentController
 **断路器在什么情况下开始起作用**
 
 ```java
-//=====服务熔断
+//=服务熔断
 @HystrixCommand(fallbackMethod = "paymentCircuitBreaker_fallback",commandProperties = {
     @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),// 是否开启断路器
     @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),// 请求次数
@@ -1978,7 +1977,7 @@ public class PaymentHystrixMain8001
 
 Cloud全家桶中有个很重要的组件就是网关，在1.x版本中都是采用的Zuul网关;
 
-但在2.x版本中，zuul的升级一直跳票，SpringCloud最后自己研发了一个网关替代Zuul，那就是SpringCloud Gateway—句话：==gateway是原zuul1.x版的替代==
+但在2.x版本中，zuul的升级一直跳票，SpringCloud最后自己研发了一个网关替代Zuul，那就是SpringCloud Gateway—句话：gateway是原zuul1.x版的替代
 
 ![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/54b61d819aa1630bc61732de340b55b4.png)
 
@@ -1988,7 +1987,7 @@ Gateway旨在提供一种简单而有效的方式来对API进行路由，以及�
 
 SpringCloud Gateway是Spring Cloud的一个全新项目，基于Spring 5.0+Spring Boot 2.0和Project Reactor等技术开发的网关，它旨在为微服务架构提供—种简单有效的统一的API路由管理方式。
 
-SpringCloud Gateway作为Spring Cloud 生态系统中的网关，目标是替代Zuul，在Spring Cloud 2.0以上版本中，没有对新版本的Zul 2.0以上最新高性能版本进行集成，仍然还是使用的Zuul 1.x非Reactor模式的老版本。而为了提升网关的性能，==SpringCloud Gateway是基于WebFlux框架实现的，而WebFlux框架底层则使用了高性能的Reactor模式通信框架Netty==。
+SpringCloud Gateway作为Spring Cloud 生态系统中的网关，目标是替代Zuul，在Spring Cloud 2.0以上版本中，没有对新版本的Zul 2.0以上最新高性能版本进行集成，仍然还是使用的Zuul 1.x非Reactor模式的老版本。而为了提升网关的性能，SpringCloud Gateway是基于WebFlux框架实现的，而WebFlux框架底层则使用了高性能的Reactor模式通信框架Netty。
 
 Spring Cloud Gateway的目标提供统一的路由方式且基于 Filter链的方式提供了网关基本的功能，例如:安全，监控/指标，和限流。
 
@@ -2012,12 +2011,12 @@ Spring Cloud Gateway的目标提供统一的路由方式且基于 Filter链的�
 
    - 一方面因为Zuul1.0已经进入了维护阶段，而且Gateway是SpringCloud团队研发的，是亲儿子产品，值得信赖。而且很多功能Zuul都没有用起来也非常的简单便捷。
 
-   - Gateway是基于==异步非阻塞模型==上进行开发的，性能方面不需要担心。虽然Netflix早就发布了最新的Zuul 2.x，但Spring Cloud貌似没有整合计划。而且Netflix相关组件都宣布进入维护期；不知前景如何?
+   - Gateway是基于异步非阻塞模型上进行开发的，性能方面不需要担心。虽然Netflix早就发布了最新的Zuul 2.x，但Spring Cloud貌似没有整合计划。而且Netflix相关组件都宣布进入维护期；不知前景如何?
    - 多方面综合考虑Gateway是很理想的网关选择。
 
 2. SpringCloud Gateway具有如下特性
 
-   - ==基于Spring Framework 5，Project Reactor和Spring Boot 2.0进行构建==；
+   - 基于Spring Framework 5，Project Reactor和Spring Boot 2.0进行构建；
    - 动态路由：能够匹配任何请求属性；
    - 可以对路由指定Predicate (断言)和Filter(过滤器)；
    - 集成Hystrix的断路器功能；
@@ -2030,8 +2029,8 @@ Spring Cloud Gateway的目标提供统一的路由方式且基于 Filter链的�
 
    在SpringCloud Finchley正式版之前，Spring Cloud推荐的网关是Netflix提供的Zuul。
 
-   - Zuul 1.x是一个基于==阻塞I/O==的API Gateway。
-   - Zuul 1.x==基于Servlet 2.5使用阻塞==架构，它不支持任何长连接(如WebSocket)Zuul的设计模式和Nginx较像，每次I/О操作都是从工作线程中选择一个执行，请求线程被阻塞到工作线程完成，但是差别是Nginx用C++实现，Zuul用Java实现，而JVM本身会有第-次加载较慢的情况，使得Zuul的性能相对较差。
+   - Zuul 1.x是一个基于阻塞I/O的API Gateway。
+   - Zuul 1.x基于Servlet 2.5使用阻塞架构，它不支持任何长连接(如WebSocket)Zuul的设计模式和Nginx较像，每次I/О操作都是从工作线程中选择一个执行，请求线程被阻塞到工作线程完成，但是差别是Nginx用C++实现，Zuul用Java实现，而JVM本身会有第-次加载较慢的情况，使得Zuul的性能相对较差。
    - Zuul 2.x理念更先进，想基于Netty非阻塞和支持长连接，但SpringCloud目前还没有整合。Zuul .x的性能较Zuul 1.x有较大提升。在性能方面，根据官方提供的基准测试,Spring Cloud Gateway的RPS(每秒请求数)是Zuul的1.6倍。
    - Spring Cloud Gateway建立在Spring Framework 5、Project Reactor和Spring Boot2之上，使用非阻塞API。
    - Spring Cloud Gateway还支持WebSocket，并且与Spring紧密集成拥有更好的开发体验
@@ -2048,9 +2047,9 @@ Zuul1.x模型
 
 上述模式的缺点：
 
-- Servlet是一个简单的网络IO模型，当请求进入Servlet container时，Servlet container就会为其绑定一个线程，在==并发不高==的场景下这种模型是适用的。但是一旦高并发(如抽风用Jmeter压)，线程数量就会上涨，而线程资源代价是昂贵的（上线文切换，内存消耗大）严重影响请求的处理时间。在一些简单业务场景下，不希望为每个request分配一个线程，只需要1个或几个线程就能应对极大并发的请求，这种业务场景下servlet模型没有优势。
+- Servlet是一个简单的网络IO模型，当请求进入Servlet container时，Servlet container就会为其绑定一个线程，在并发不高的场景下这种模型是适用的。但是一旦高并发(如抽风用Jmeter压)，线程数量就会上涨，而线程资源代价是昂贵的（上线文切换，内存消耗大）严重影响请求的处理时间。在一些简单业务场景下，不希望为每个request分配一个线程，只需要1个或几个线程就能应对极大并发的请求，这种业务场景下servlet模型没有优势。
 
-- 所以Zuul 1.X是==基于servlet之上的一个阻塞式==处理模型，即Spring实现了处理所有request请求的一个servlet (DispatcherServlet)并由该servlet阻塞式处理处理。所以SpringCloud Zuul无法摆脱servlet模型的弊端。
+- 所以Zuul 1.X是基于servlet之上的一个阻塞式处理模型，即Spring实现了处理所有request请求的一个servlet (DispatcherServlet)并由该servlet阻塞式处理处理。所以SpringCloud Zuul无法摆脱servlet模型的弊端。
 
 Gateway模型
 
@@ -2059,7 +2058,7 @@ Gateway模型
 > https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#spring-webflux
 
 - 传统的Web框架，比如说: Struts2，SpringMVC等都是基于Servlet APl与Servlet容器基础之上运行的。
-- 但是==在Servlet3.1之后有了异步非阻塞==的支持。而==WebFlux是一个典型非阻塞异步的框架==，它的核心是基于Reactor的相关API实现的。相对于传统的web框架来说，它可以运行在诸如Netty，Undertow及支持Servlet3.1的容器上。非阻塞式+函数式编程(Spring 5必须让你使用Java 8)。
+- 但是在Servlet3.1之后有了异步非阻塞的支持。而WebFlux是一个典型非阻塞异步的框架，它的核心是基于Reactor的相关API实现的。相对于传统的web框架来说，它可以运行在诸如Netty，Undertow及支持Servlet3.1的容器上。非阻塞式+函数式编程(Spring 5必须让你使用Java 8)。
 - Spring WebFlux是Spring 5.0 引入的新的响应式框架，区别于Spring MVC，它不需要依赖Servlet APl，它是完全异步非阻塞的，并且基于Reactor来实现响应式流规范。
 
 ### **三大核心概念**
@@ -2294,7 +2293,7 @@ public class GateWayConfig
 
 通过微服务名实现动态路由
 
-默认情况下Gateway会根据注册中心注册的服务列表，以注册中心上微服务名为路径创建==动态路由进行转发，从而实现动态路由的功能==。
+默认情况下Gateway会根据注册中心注册的服务列表，以注册中心上微服务名为路径创建动态路由进行转发，从而实现动态路由的功能。
 
 启动	eureka7001、payment8001/8002
 
@@ -2531,7 +2530,7 @@ public class MyLogGateWayFilter implements GlobalFilter,Ordered
 
         String uname = exchange.getRequest().getQueryParams().getFirst("uname");
 
-        if(uname == null)
+        if(uname  null)
         {
             log.info("*******用户名为null，非法用户，o(╥﹏╥)o");
             exchange.getResponse().setStatusCode(HttpStatus.NOT_ACCEPTABLE);
@@ -2567,9 +2566,9 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/d5462e3b8c3a063561f5f8fc7fde327e.png" alt="img" style="zoom:200%;" />
 
-SpringCloud Config为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为==各个不同微服务应用==的所有环境提供了一个==中心化的外部配置==。
+SpringCloud Config为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为各个不同微服务应用的所有环境提供了一个中心化的外部配置。
 
-SpringCloud Config分为==服务端==和==客户端==两部分。
+SpringCloud Config分为服务端和客户端两部分。
 
 服务端也称为分布式配置中心，它是一个独立的微服务应用，用来连接配置服务器并为客户端提供获取配置信息，加密/解密信息等访问接口。
 
@@ -2817,7 +2816,7 @@ pom.xml
 
 applicaiton.yml是用户级的资源配置项
 
-bootstrap.yml是系统级的，==优先级更加高==
+bootstrap.yml是系统级的，优先级更加高
 
 Spring Cloud会创建一个Bootstrap Context，作为Spring应用的Application Context的父上下文。
 
@@ -2825,7 +2824,7 @@ Spring Cloud会创建一个Bootstrap Context，作为Spring应用的Application 
 
 Bootstrap属性有高优先级，默认情况下，它们不会被本地配置覆盖。Bootstrap context和Application Context有着不同的约定，所以新增了一个bootstrap.yml文件，保证Bootstrap Context和Application Context配置的分离。
 
-==要将Client模块下的application.yml文件改为bootstrap.yml,这是很关键的==，因为==bootstrap.yml是比application.yml先加载的==。bootstrap.yml优先级高于application.yml。
+要将Client模块下的application.yml文件改为bootstrap.yml,这是很关键的，因为bootstrap.yml是比application.yml先加载的。bootstrap.yml优先级高于application.yml。
 
 ```yaml
 server:
@@ -2978,11 +2977,11 @@ http://localhost:3355/configInfo
 
 一言以蔽之，分布式自动刷新配置功能。
 
-==Spring Cloud Bus配合Spring Cloud Config使用可以实现配置的动态刷新==
+Spring Cloud Bus配合Spring Cloud Config使用可以实现配置的动态刷新
 
 ![image-20210507201803779](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210507201803779.png)
 
-Spring Cloud Bus是用来将分布式系统的节点与轻量级消息系统链接起来的框架，它整合了Java的事件处理机制和消息中间件的功能。Spring Clud Bus==目前支持RabbitMQ和Kafka。==
+Spring Cloud Bus是用来将分布式系统的节点与轻量级消息系统链接起来的框架，它整合了Java的事件处理机制和消息中间件的功能。Spring Clud Bus目前支持RabbitMQ和Kafka。
 
 **作用**
 
@@ -2992,11 +2991,11 @@ Spring Cloud Bus能管理和传播分布式系统间的消息，就像一个分�
 
 **什么是总线**
 
-在微服务架构的系统中，通常会使用==轻量级的消息代理==来构建一个==共用的消息主题，==并让系统中所有微服务实例都连接上来。由于==该主题中产生的消息会被所有实例监听和消费，所以称它为消息总线==。在总线上的各个实例，都可以方便地广播一些需要让其他连接在该主题上的实例都知道的消息。
+在微服务架构的系统中，通常会使用轻量级的消息代理来构建一个共用的消息主题，并让系统中所有微服务实例都连接上来。由于该主题中产生的消息会被所有实例监听和消费，所以称它为消息总线。在总线上的各个实例，都可以方便地广播一些需要让其他连接在该主题上的实例都知道的消息。
 
 基本原理
 
-ConfigClient实例都监听MQ中同一个==topic==(默认是==Spring Cloud Bus==)。当一个服务刷新数据的时候，它会把这个信息放入到Topic中，这样其它监听同一Topic的服务就能得到通知，然后去更新自身的配置。
+ConfigClient实例都监听MQ中同一个topic(默认是Spring Cloud Bus)。当一个服务刷新数据的时候，它会把这个信息放入到Topic中，这样其它监听同一Topic的服务就能得到通知，然后去更新自身的配置。
 
 ### RabbitMQ环境配置
 
@@ -3415,11 +3414,11 @@ Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化�
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/dd57e502418ecdae99f29991abe8bb02.png" alt="img" style="zoom:200%;" />
 
-生产者/消费者之间靠==消息==媒介传递信息内容——Message
+生产者/消费者之间靠消息媒介传递信息内容——Message
 
-消息必须走特定的==通道== ——消息通道 Message Channel
+消息必须走特定的通道 ——消息通道 Message Channel
 
-消息通道里的消息如何被消费呢，谁负责收发==处理== —— 消息通道MessageChannel的子接口SubscribableChannel，由MessageHandler消息处理器所订阅。
+消息通道里的消息如何被消费呢，谁负责收发处理 —— 消息通道MessageChannel的子接口SubscribableChannel，由MessageHandler消息处理器所订阅。
 
 **为什么用Cloud Stream？**
 
@@ -3435,7 +3434,7 @@ Spring Cloud Stream为一些供应商的消息中间件产品提供了个性化�
 
 通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。通过向应用程序暴露统一的Channel通道，使得应用程序不需要再考虑各种不同的消息中间件实现。
 
-==通过定义绑定器Binder作为中间层，实现了应用程序与消息中间件细节之间的隔离。==
+通过定义绑定器Binder作为中间层，实现了应用程序与消息中间件细节之间的隔离。
 
 Binder：
 
@@ -3772,11 +3771,11 @@ public class ReceiveMessageListenerController
 
 - http://localhost:8801/sendMessage
 - 目前是8802/8803同时都收到了，存在重复消费问题
-- 如何解决：==分组==和==持久化属性group==（重要）
+- 如何解决：分组和持久化属性group（重要）
 
 #### **生产实际案例**
 
-比如在如下场景中，订单系统我们做集群部署，都会从RabbitMQ中获取订单信息，那如果==一个订单同时被两个服务获取到==，那么就会造成数据错误，我们得避免这种情况。这时我们就可以==使用Stream中的消息分组来解决==。
+比如在如下场景中，订单系统我们做集群部署，都会从RabbitMQ中获取订单信息，那如果一个订单同时被两个服务获取到，那么就会造成数据错误，我们得避免这种情况。这时我们就可以使用Stream中的消息分组来解决。
 
 ![image-20210509210739265](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210509210739265.png)
 
@@ -3784,7 +3783,7 @@ public class ReceiveMessageListenerController
 
 #### 分组消费
 
-**原理**：微服务应用放置于同一个group中，就能够保证消息只会被其中一个应用消费一次。==不同的组==是可以重复消费的，==同一个组内会发生竞争关系==，只有其中一个可以消费。
+**原理**：微服务应用放置于同一个group中，就能够保证消息只会被其中一个应用消费一次。不同的组是可以重复消费的，同一个组内会发生竞争关系，只有其中一个可以消费。
 
 **解决方法**：
 
@@ -3818,18 +3817,18 @@ spring:
             group: A_Group #<----------------------------------------关键
 ```
 
-结论：不同组还是==重复消费==
+结论：不同组还是重复消费
 
 8802/8803实现了轮询分组，每次只有一个消费者，8801模块的发的消息只能被8802或8803其中一个接收到，这样避免了重复消费。
 
-将==8802/8803都变成相同组，group两个相同==
+将8802/8803都变成相同组，group两个相同
 
 结论：同一个组的多个微服务实例，每次只会有一个拿到
 
 #### 持久化
 
 - 通过上述，解决了重复消费问题，再看看持久化。
-- 停止8802/8803并==去除掉==8802的分组group: A_Group，8803的分组group: A_Group没有去掉。
+- 停止8802/8803并去除掉8802的分组group: A_Group，8803的分组group: A_Group没有去掉。
 - 8801先发送4条消息到RabbitMq。
 
 - 先启动8802，无分组属性配置，后台没有打出来消息。
@@ -3975,7 +3974,7 @@ spring:
 业条类OrderController
 
 ```java
-    // ====================> zipkin+sleuth
+    // > zipkin+sleuth
     @GetMapping("/consumer/payment/zipkin")
     public String paymentZipkin()
     {

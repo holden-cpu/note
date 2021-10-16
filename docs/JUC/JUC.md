@@ -1948,7 +1948,11 @@ public class ThreadPoolDemo1 {
 
 3. 当一个线程完成任务时，它会从队列中取下一个任务来执行
 
-4. 当一个线程无事可做超过一定的时间（keepAliveTime）时，线程会判断： 4.1 如果当前运行的线程数大于corePoolSize，那么这个线程就被停掉。 4.2 所以线程池的所有任务完成后，它最终会收缩到corePoolSize的大小。
+4. 当一个线程无事可做超过一定的时间（keepAliveTime）时，线程会判断： 
+
+   4.1 如果当前运行的线程数大于corePoolSize，那么这个线程就被停掉。
+
+   4.2 所以线程池的所有任务完成后，它最终会收缩到corePoolSize的大小。
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210721155358779.png" alt="image-20210721155358779" style="zoom:150%;" />
 

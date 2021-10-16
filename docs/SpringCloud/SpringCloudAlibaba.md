@@ -695,7 +695,7 @@ spring:
 
 <img src="https://note-java.oss-cn-beijing.aliyuncs.com/img/681c3dc16a69f197896cbff482f2298e.png" alt="img" style="zoom:200%;" />
 
-默认Nacos使用嵌入式数据库实现数据的存储。所以，如果启动多个默认配置下的Nacos节点，数据存储是存在一致性问题的。为了解决这个问题，==Nacos采用了集中式存储的方式来支持集群化部署，目前只支持MySQL的存储。==
+默认Nacos使用嵌入式数据库实现数据的存储。所以，如果启动多个默认配置下的Nacos节点，数据存储是存在一致性问题的。为了解决这个问题，Nacos采用了集中式存储的方式来支持集群化部署，目前只支持MySQL的存储。
 
 Nacos支持三种部署模式
 
