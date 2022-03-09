@@ -1227,7 +1227,7 @@ eureka:
 
 主启动类	OrderHystrixMain80.java
 
-```
+```java
 @SpringBootApplication
 @EnableFeignClients
 //@EnableHystrix
@@ -1401,7 +1401,7 @@ feign:
 
 主启动类 
 
-```
+```java
 @SpringBootApplication
 @EnableFeignClients
 @EnableHystrix//添加到此处
