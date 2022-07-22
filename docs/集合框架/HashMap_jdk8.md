@@ -8,7 +8,7 @@
 
 在JDK8中，优化了HashMap的数据结构，引入了红黑树。即HashMap的数据结构：数组+链表+红黑树。HashMap变成了这样。
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0001.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0001.png)
 
 ### 为什么要引入红黑树
 

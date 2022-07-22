@@ -410,7 +410,7 @@ Spring的事务管理默认只对出现运行期异常(java.lang.RuntimeExceptio
 
 - @Transactional注解使用的是AOP，在使用动态代理的时候只能针对`public`方法进行代理
 
-没有被 Spring 管理的bean
+没有被 Spring 管理
 
 调用自身的方法
 

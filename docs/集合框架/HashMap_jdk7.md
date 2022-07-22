@@ -164,7 +164,7 @@ hadoop2
 
 大致是这样的一个结构
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0001.png)
 
 - 每个链表就算哈希表的桶（bucket）
 - 链表的节点值就算一个键值对
@@ -354,7 +354,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 
 `HashMap`中的数组元素 & 链表节点 采用 `Entry`类实现
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0001.png)
 
 1、一个正方形代表一个Entry对象，同时也代表一个键值对。
 
@@ -697,7 +697,13 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 大概画了一下图：
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0002.png) ![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0003.png) ![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0004.png) ![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0005.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0002.png)
+
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0003.png)
+
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0004.png)
+
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0005.png)
 
 1、在扩容`resize（）`过程中，在将旧数组上的数据转移到新数组上时，转移操作就是按旧链表的正序遍历链表、在新链表的头部依次插入，即在转移数据、扩容后，容易出现链表逆序的情况。
 
@@ -777,7 +783,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **hashmap初始状态**
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0006.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0006.png)
 
 1、此时只有一个元素，扩容阈值为2*0.75 = 1.5。
 
@@ -801,7 +807,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **两个线程调用完毕之后，hashmap目前是这样的。**
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0007.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0007.png)
 
 此时size==3。下次再进行put的时候，**addEntry()方法里的if判断就会成立**。
 
@@ -818,7 +824,9 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、来看下此时内存里的状态
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0008.png) ![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0009.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0008.png)
+
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0009.png)
 
 ## 步骤4
 
@@ -851,7 +859,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 2、线程2直接**扩容完毕**，那么完成后的状态是这样【假设e2和e3还是hash到同一个位置】
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0010.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0010.png)
 
 3、线程1还是原来的状态
 
@@ -861,13 +869,11 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 目前两个线程里的新数组是这样的
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0011.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0011.png)
 
 为了方便后面观看，我画成这样。
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0012.png)
-
-## 步骤6
+## ![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0012.png)步骤6
 
 ```java
 void transfer(Entry[] newTable, boolean rehash) {
@@ -905,7 +911,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 也就变成了下面这个样子。
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0013.png)
+## ![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0013.png)
 
 ## 步骤7
 
@@ -947,7 +953,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 执行完，变成这样。
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0014.png)
+ ![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0014.png)
 
 ## 步骤8
 
@@ -959,7 +965,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、执行pos_3： newTable[i] = e得到 newTable1[3] == e2
 
-![img](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0015.png)
+![img](https://note-java.oss-cn-beijing.aliyuncs.com/img/0015.png)
 
 这样就形成了循环链表，再get()数据就会陷入死循环。
 

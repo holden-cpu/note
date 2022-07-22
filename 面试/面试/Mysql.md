@@ -758,15 +758,6 @@ ORDER BY rental_id DESC LIMIT 20;
 
 https://www.cnblogs.com/kerrycode/p/5593204.html
 
-1️⃣show variables like 'slow_query_log';查询是否开启慢查询日志
-【开启慢查询sql：set global slow_query_log = 1/on;】
-【关闭慢查询sql：set global slow_query_log = 0/off;】
-2️⃣show variables like 'log_queries_not_using_indexes';查询未使用索引是否开启记录慢查询日志
-【开启记录未使用索引sql：set global log_queries_not_using_indexes=1/on】
-【关闭记录未使用索引sql：set global log_queries_not_using_indexes=1/off】
-3️⃣show variables like 'long_query_time';查询超过多少秒的记录到慢查询日志中
-【设置超1秒就记录慢查询sql：set global long_query_time= 1;设置超1秒就记录】
-
 ### 61.MySQL支持查询结果缓存吗?
 
 MySQL 4.0推出，5.6中默认禁用，5.7中被deprecated（废弃），8.0版本被Removed，

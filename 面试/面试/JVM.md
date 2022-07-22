@@ -104,8 +104,6 @@ Java虚拟机就是<font color='red'>二进制字节码的运行环境</font>，
 
 如果输入数据不是 ClassFile 的结构，则会抛出 ClassFormatError
 
-![类的生命周期](https://note-java.oss-cn-beijing.aliyuncs.com/img/image.png)
-
 ### 10.String str="R";创建了几个对象?
 
 1. 如果 String 常量池中已经创建了 "R"，此时创建了 0 个对象；
@@ -443,8 +441,6 @@ System.gc() 或Runtime.getRuntime().gc() 。
 2. 并行回收器：ParNew、Parallel Scavenge、Parallel old
 3. 并发回收器：CMS、G1 
 4. 低延迟收集器：Shenandoah、ZGC
-
-[D:\Typora笔记\note\docs\JVM\内存与垃圾回收\16.垃圾回收器.md]()
 
 ### 36.常用的垃圾回收算法有哪些?
 

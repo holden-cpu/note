@@ -201,7 +201,8 @@ $ sudo yum install docker-ce docker-ce-cli containerd.io
 启动 Docker：
 
 ```bash
-$ sudo systemctl enable docker
+$ sudo systemctl enable docker   
+service docker start
 $ sudo systemctl start docker
 ```
 
@@ -2353,9 +2354,11 @@ $ docker build -t xxxxx:xx  .
 
 https://www.cnblogs.com/ybyn/p/13698058.html
 
-`docker run -p 3306:3306 --name guli_edu_mysql -v /docker/guli_edu/mysql/conf:/etc/mysql -v /docker/guli_edu/mysql/data:/var/lib/mysql -v /docker/guli_edu/mysql/logs:/var/log/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
+`docker run -p 3306:3306 --name my-mysql -v /docker/guli_edu/mysql/conf:/etc/mysql -v /docker/guli_edu/mysql/data:/var/lib/mysql -v /docker/guli_edu/mysql/logs:/var/log/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
 
-my.cnf
+docker run -p 3306:3306 --name mall-mysql -v /docker/mall/mysql/conf:/etc/mysql -v /docker/mall/mysql/data:/var/lib/mysql -v /docker/mall/mysql/logs:/var/log/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+vim /docker/mall/mysql/conf/my.cnf
 
 ```
 [client]
@@ -2667,7 +2670,7 @@ symbolic-links=0
 ![image-20210825134247611](https://note-java.oss-cn-beijing.aliyuncs.com/img/image-20210825134247611.png)
 
 ```
-docker run -d --name guli_edu_nginx -p 9001:80 -v /docker/guli_edu/nginx/conf:/etc/nginx -v /docker/guli_edu/nginx/html:/usr/share/nginx/html nginx
+docker run -d --name mall-nginx -p 9001:80 -v /docker/mall/nginx/conf:/etc/nginx -v /docker/mall/nginx/html:/usr/share/nginx/html nginx
 ```
 
 ## 配置反向代理
@@ -2679,7 +2682,7 @@ docker run -d --name guli_edu_nginx -p 9001:80 -v /docker/guli_edu/nginx/conf:/e
 # 整合redis
 
 ```
-docker run -p 6379:6379 --name guli_edu_redis -v /docker/guli_edu/redis/redis.conf:/etc/redis/redis.conf -v /docker/guli_edu/redis/data:/data -d  redis redis-server /etc/redis/redis.conf --appendonly yes
+docker run -p 6379:6379 --name mall-redis -v /docker/mall/redis/redis.conf:/etc/redis/redis.conf -v /docker/mall/redis/data:/data -d  redis redis-server /etc/redis/redis.conf --appendonly yes
 ```
 
 `docker exec -it guli_edu_redis /bin/bash`
