@@ -1,5 +1,5 @@
 ---
-
+ 
 typora-root-url: ./
 typora-copy-images-to: upload
 ---
@@ -167,7 +167,7 @@ String::intern方法是一个本地方法。作用：如果字符串常量池中
 
 2、类加载器负责通过类的权限定名读取 Java class类 字节码，并转换成`java.lang.Class` 类的一个实例
 
-基本上所有类加载器都是 `java.lang.ClassLoader`类的一个实例，除了 引导类加载器（启动类加载器）。
+基本上所有类加载器都是 `java.lang.ClassLoader`类的一个实例，除了 引导类加载器（启动类加载器）
 
 24. ### 类加载器（ClassLoader）有哪些方法?
 
