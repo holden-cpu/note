@@ -23,7 +23,7 @@ echo 将变更情况提交到远程github服务器
 
 
 
-git push 
+git push --force upstream
 
 
 
